@@ -88,6 +88,13 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
             }).ToList();
             ViewBag.CountPurchaseRequest = countPurchaseRequest.Count;
 
+            var countApproval = _applicationDbContext.Approvals.Where(p => p.Status == "Not Approved").GroupBy(u => u.PurchaseRequestId).Select(y => new
+            {
+                ApprovalId = y.Key,
+                CountOfApprovals = y.Count()
+            }).ToList();
+            ViewBag.CountApproval = countApproval.Count;
+
             var data = _purchaseRequestRepository.GetAllPurchaseRequest();
             return View(data);
         }

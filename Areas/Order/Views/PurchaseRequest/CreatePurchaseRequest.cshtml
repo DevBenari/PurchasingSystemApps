@@ -37,22 +37,44 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" asp-for="UserApprovalId">
-                            User Approval
+                            Approve By User 1
                         </label>
                         <div class="col-sm-10">
                             <select asp-for="UserApprovalId" asp-items="@ViewBag.Approval" class="form-control select2bs4" id="userapprovalid" style="width: 100%;">
-                                <option value="" hidden disabled selected>--Choice User--</option>
+                                <option value="" hidden disabled selected>--Choose User--</option>
                             </select>
                             <span asp-validation-for="UserApprovalId" class="error"></span>
                         </div>
-                    </div>                    
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" asp-for="UserApprovalId">
+                            Approve By User 2
+                        </label>
+                        <div class="col-sm-10">
+                            <select asp-for="UserApprovalId" asp-items="@ViewBag.Approval" class="form-control select2bs4" id="userapprovalid" style="width: 100%;">
+                                <option value="" hidden disabled selected>--Choose User--</option>
+                            </select>
+                            <span asp-validation-for="UserApprovalId" class="error"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" asp-for="UserApprovalId">
+                            Approve By User 3
+                        </label>
+                        <div class="col-sm-10">
+                            <select asp-for="UserApprovalId" asp-items="@ViewBag.Approval" class="form-control select2bs4" id="userapprovalid" style="width: 100%;">
+                                <option value="" hidden disabled selected>--Choose User--</option>
+                            </select>
+                            <span asp-validation-for="UserApprovalId" class="error"></span>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" asp-for="TermOfPaymentId">
                             Term Of Payment
                         </label>
                         <div class="col-sm-10">
                             <select asp-for="TermOfPaymentId" asp-items="@ViewBag.TermOfPayment" class="form-control select2bs4" id="termofpayment" style="width: 100%;">
-                                <option value="" hidden disabled selected>--Choice TOP--</option>
+                                <option value="" hidden disabled selected>--Choose TOP--</option>
                             </select>
                             <span asp-validation-for="TermOfPaymentId" class="error"></span>
                         </div>
@@ -74,8 +96,8 @@
                         <div class="form-group row">
                             <div class="col-sm-5">
                                 <div class="form-group">
-                                    <select asp-items="@ViewBag.Product" class="form-control select2bs4" style="width: 100%;" id="produklist" data-placeholder="--Choice Product--">
-                                        <option value="" hidden disabled selected>--Choice Product--</option>
+                                    <select asp-items="@ViewBag.Product" class="form-control select2bs4" style="width: 100%;" id="produklist" data-placeholder="--Choose Product--">
+                                        <option value="" hidden disabled selected>--Choose Product--</option>
                                     </select>
                                 </div>
                             </div>

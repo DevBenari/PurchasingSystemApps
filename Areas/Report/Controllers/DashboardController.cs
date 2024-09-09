@@ -2,10 +2,10 @@
 using PurchasingSystemApps.Areas.MasterData.Repositories;
 using PurchasingSystemApps.Data;
 
-namespace PurchasingSystemApps.Areas.Warehouse.Controllers
+namespace PurchasingSystemApps.Areas.Report.Controllers
 {
-    [Area("Warehouse")]
-    [Route("Warehouse/[Controller]/[Action]")]
+    [Area("Report")]
+    [Route("Report/[Controller]/[Action]")]
     public class DashboardController : Controller
     {
         private readonly ApplicationDbContext _applicationDbContext;
@@ -19,18 +19,9 @@ namespace PurchasingSystemApps.Areas.Warehouse.Controllers
             _applicationDbContext = applicationDbContext;
             _userActiveRepository = userActiveRepository;
         }
+
         public IActionResult Index()
         {
-            ViewBag.Active = "Warehouse";
-
-            //Khusus Badge pada Menu dengan Statement Berdasarkan Status Approve
-            //var countPurchaseRequestStatus = _applicationDbContext.PurchaseRequests.Where(p => p.Status == "Not Approved").GroupBy(u => u.PurchaseRequestId).Select(y => new
-            //{
-            //    PurchaseRequestId = y.Key,
-            //    CountOfPurchaseRequests = y.Count()
-            //}).ToList();
-
-            //ViewBag.CountPurchaseRequestStatus = countPurchaseRequestStatus.Count;
             return View();
         }
     }

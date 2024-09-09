@@ -93,7 +93,7 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
 
         public IEnumerable<QtyDifferenceRequest> GetAllQtyDifferenceRequest()
         {
-            return _context.QtyDifferenceRequests
+            return _context.QtyDifferenceRequests.OrderByDescending(c => c.CreateDateTime)
                 .Include(d => d.PurchaseOrder)
                 .Include(a => a.QtyDifference)
                 //.Include(r => r.QtyDifferenceRequestDetails)

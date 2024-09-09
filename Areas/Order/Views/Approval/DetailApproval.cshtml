@@ -100,7 +100,12 @@
                     else if (Model.Status == "Not Approved")
                     {
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" asp-for="Status">Status</label>
+                            <label class="col-sm-2 col-form-label" asp-for="Status">Action
+                                <small class="badge" id="toolAction"
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       title="Wajib Diisi"><i class="fas fa-info-circle" style="color:#ff0000"></i></small>
+                            </label>
                             <div class="col-sm-10">
                                 <select class="form-control select2bs4" style="width: 100%;" asp-for="Status">
                                     <option value="" hidden disabled selected>--Choose Status--</option>
@@ -210,5 +215,6 @@
                 theme: 'bootstrap4'
             })
         })
+        $('#toolAction').tooltip({ animation: true });
     </script>
 }

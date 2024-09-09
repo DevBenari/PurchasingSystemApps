@@ -95,7 +95,7 @@ namespace PurchasingSystemApps.Areas.Transaction.Repositories
 
         public IEnumerable<UnitRequest> GetAllUnitRequest()
         {
-            return _context.UnitRequests
+            return _context.UnitRequests.OrderByDescending(c => c.CreateDateTime)
                 .Include(d => d.UnitRequestDetails)
                 .Include(u => u.ApplicationUser)
                 .Include(z => z.UnitLocation)

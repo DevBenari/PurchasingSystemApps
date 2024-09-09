@@ -74,7 +74,7 @@ namespace PurchasingSystemApps.Areas.Warehouse.Repositories
 
         public IEnumerable<ReceiveOrder> GetAllReceiveOrder()
         {
-            return _context.ReceiveOrders
+            return _context.ReceiveOrders.OrderByDescending(c => c.CreateDateTime)
                 .Include(d => d.PurchaseOrder)
                 .Include(d => d.PurchaseOrderDetails)
                 .Include(r => r.ReceiveOrderDetails)

@@ -93,7 +93,7 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
 
         public IEnumerable<PurchaseRequest> GetAllPurchaseRequest()
         {
-            return _context.PurchaseRequests
+            return _context.PurchaseRequests.OrderByDescending(o => o.CreateDateTime)
                 .Include(d => d.PurchaseRequestDetails)
                 .Include(u => u.ApplicationUser)
                 .Include(t => t.TermOfPayment)

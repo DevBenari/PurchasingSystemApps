@@ -118,7 +118,7 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
 
         public IEnumerable<PurchaseOrder> GetAllPurchaseOrder()
         {
-            return _context.PurchaseOrders
+            return _context.PurchaseOrders.OrderByDescending(c => c.CreateDateTime)
                 .Include(d => d.PurchaseOrderDetails)
                 .Include(u => u.ApplicationUser)
                 .Include(t => t.TermOfPayment)

@@ -14,6 +14,9 @@ namespace PurchasingSystemApps.Areas.Order.Models
         public string PurchaseRequestNumber { get; set; }
         public string UserAccessId { get; set; }
         public Guid? UserApprovalId { get; set; }
+        //public Guid? UserApprove1 { get; set; }
+        //public Guid? UserApprove2 { get; set; }
+        //public Guid? UserApprove3 { get; set; }
         public Guid? TermOfPaymentId { get; set; }
         public string Status { get; set; }
         public int QtyTotal { get; set; }

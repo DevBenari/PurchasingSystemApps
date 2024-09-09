@@ -89,7 +89,7 @@ namespace PurchasingSystemApps.Areas.Warehouse.Repositories
 
         public IEnumerable<ApprovalRequest> GetAllApprovalRequest()
         {
-            return _context.ApprovalRequests
+            return _context.ApprovalRequests.OrderByDescending(c => c.CreateDateTime)
                 .Include(d => d.UnitRequest)
                 .Include(u => u.UnitLocation)
                 .Include(z => z.UnitRequestManager)

@@ -86,7 +86,7 @@ namespace PurchasingSystemApps.Areas.Warehouse.Repositories
 
         public IEnumerable<QtyDifference> GetAllQtyDifference()
         {
-            return _context.QtyDifferences
+            return _context.QtyDifferences.OrderByDescending(c => c.CreateDateTime)
                 .Include(d => d.PurchaseOrder)
                 .Include(a => a.PurchaseOrderDetails)
                 .Include(r => r.QtyDifferenceDetails)

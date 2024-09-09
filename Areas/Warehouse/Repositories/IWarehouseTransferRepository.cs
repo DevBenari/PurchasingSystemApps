@@ -120,7 +120,7 @@ namespace PurchasingSystemApps.Areas.Warehouse.Repositories
 
         public IEnumerable<WarehouseTransfer> GetAllWarehouseTransfer()
         {
-            return _context.WarehouseTransfers
+            return _context.WarehouseTransfers.OrderByDescending(c => c.CreateDateTime)
                 .Include(d => d.WarehouseTransferDetails)
                 .Include(u => u.ApplicationUser)
                 .Include(p => p.UnitLocation)

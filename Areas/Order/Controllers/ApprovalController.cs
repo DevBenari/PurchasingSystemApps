@@ -70,6 +70,13 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
             }).ToList();
             ViewBag.CountApproval= countApproval.Count;
 
+            var countPurchaseRequest = _applicationDbContext.PurchaseRequests.Where(p => p.Status == "Not Approved").GroupBy(u => u.PurchaseRequestId).Select(y => new
+            {
+                PurchaseRequestId = y.Key,
+                CountOfPurchaseRequests = y.Count()
+            }).ToList();
+            ViewBag.CountPurchaseRequest = countPurchaseRequest.Count;
+
             var getUserLogin = _userActiveRepository.GetAllUserLogin().Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
             var getUserActive = _userActiveRepository.GetAllUser().Where(c => c.UserActiveCode == getUserLogin.KodeUser).FirstOrDefault();
 
@@ -175,6 +182,8 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
                     approval.ApproveDate = DateTime.Now;
                     approval.ApproveBy = viewModel.ApproveBy;
                 }
+
+                var checkApprove = _approvalRepository.GetAllApproval().Where(a => a.PurchaseRequestNumber == viewModel.PurchaseRequestNumber).ToList();                
 
                 var result = _purchaseRequestRepository.GetAllPurchaseRequest().Where(c => c.PurchaseRequestNumber == viewModel.PurchaseRequestNumber).FirstOrDefault();
                 if (result != null)

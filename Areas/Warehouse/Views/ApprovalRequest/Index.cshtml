@@ -60,7 +60,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Create Date</th>
-                                        <th>Create By</th>                                        
+                                        <th>Create By</th>
                                         <th>Request Number</th>
                                         <th>Warehouse Approve</th>
                                         <th>Warehouse Approve By</th>
@@ -83,6 +83,10 @@
                                             else if (pr.Status == "Approved")
                                             {
                                                 <td><div style="color:forestgreen"><b>@pr.Status</b></div></td>
+                                            }
+                                            else
+                                            {
+                                                <td><b>@pr.Status</b></td>
                                             }
                                         </tr>
                                     }

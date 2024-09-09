@@ -127,7 +127,7 @@ namespace PurchasingSystemApps.Areas.Warehouse.Repositories
 
         public IEnumerable<WarehouseRequest> GetAllWarehouseRequest()
         {
-            return _context.WarehouseRequests
+            return _context.WarehouseRequests.OrderByDescending(c => c.CreateDateTime)
                 .Include(d => d.WarehouseRequestDetails)
                 .Include(u => u.ApplicationUser)
                 .Include(p => p.UnitLocation)

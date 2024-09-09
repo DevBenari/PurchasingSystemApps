@@ -79,7 +79,7 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
 
         public IEnumerable<Approval> GetAllApproval()
         {
-            return _context.Approvals
+            return _context.Approvals.OrderByDescending(c => c.CreateDateTime)
                 .Include(u => u.ApplicationUser)
                 .Include(t => t.PurchaseRequest)
                 .Include(r => r.UserApproval)

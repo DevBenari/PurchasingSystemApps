@@ -127,7 +127,7 @@
                                 </p>
                             </a>
                         </li>
-                        @*<li class="nav-header" style="background-color:#FF0012"></li>*@
+                        <li class="nav-header">Administrator</li>
                         <li class="@(ViewBag.Active == "MasterData" ? "nav-item menu-open active":"")">
                             <a asp-action="Index" is-active-route asp-controller="Dashboard" asp-area="MasterData" class="nav-link">
                                 <i class="nav-icon fas fa-table" style="color:#FFFFFF"></i>
@@ -136,11 +136,20 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-header">Pembelian</li>
                         <li class="@(ViewBag.Active == "PurchaseRequest" ? "nav-item menu-open active":"")">
                             <a asp-action="Index" is-active-route asp-controller="PurchaseRequest" asp-area="Order" class="nav-link">
                                 <i class="nav-icon fas fa-cart-plus" style="color:#FFFFFF"></i>
                                 <p style="color:#FFFFFF">
-                                    Purchase Request <span class="float-right badge bg-info">@ViewBag.CountPurchaseRequestStatus</span>
+                                    Purchase Request @*<span class="float-right badge bg-info">@ViewBag.CountPurchaseRequestStatus</span>*@
+                                </p>
+                            </a>
+                        </li>
+                        <li class="@(ViewBag.Active == "Approval" ? "nav-item menu-open active":"")">
+                            <a asp-action="Index" is-active-route asp-controller="Approval" asp-area="Order" class="nav-link">
+                                <i class="nav-icon fas fa-cart-plus" style="color:#FFFFFF"></i>
+                                <p style="color:#FFFFFF">
+                                    Approval @*<span class="float-right badge bg-info">@ViewBag.CountPurchaseRequestStatus</span>*@
                                 </p>
                             </a>
                         </li>
@@ -152,6 +161,7 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-header">Pharmacy</li>
                         <li class="@(ViewBag.Active == "UnitRequest" ? "nav-item menu-open active":"")">
                             <a asp-action="Index" is-active-route asp-controller="UnitRequest" asp-area="Transaction" class="nav-link">
                                 <i class="nav-icon fas fa-first-aid" style="color:#FFFFFF"></i>
@@ -159,15 +169,25 @@
                                     Unit Request
                                 </p>
                             </a>
-                        </li>                        
-                        <li class="@(ViewBag.Active == "Warehouse" ? "nav-item menu-open active":"")">
-                            <a asp-action="Index" is-active-route asp-controller="Dashboard" asp-area="Warehouse" class="nav-link">
+                        </li>
+                        <li class="nav-header">Warehouse Management</li>
+                        <li class="@(ViewBag.Active == "ReceiveOrder" ? "nav-item menu-open active":"")">
+                            <a asp-action="Index" is-active-route asp-controller="ReceiveOrder" asp-area="Warehouse" class="nav-link">
                                 <i class="nav-icon fas fa-box-open" style="color:#FFFFFF"></i>
                                 <p style="color:#FFFFFF">
-                                    Warehouse Management
+                                    Receive Order
                                 </p>
                             </a>
                         </li>
+                        <li class="@(ViewBag.Active == "ApprovalRequest" ? "nav-item menu-open active":"")">
+                            <a asp-action="Index" is-active-route asp-controller="ApprovalRequest" asp-area="Warehouse" class="nav-link">
+                                <i class="nav-icon fas fa-box-open" style="color:#FFFFFF"></i>
+                                <p style="color:#FFFFFF">
+                                    Approval Request
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-header">Reporting</li>
                         <li class="@(ViewBag.Active == "Report" ? "nav-item menu-open active":"")">
                             <a asp-action="Index" is-active-route asp-controller="Dashboard" asp-area="Report" class="nav-link">
                                 <i class="nav-icon fas fa-file-alt" style="color:#FFFFFF"></i>

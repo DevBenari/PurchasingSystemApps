@@ -109,7 +109,7 @@
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
                 @*<img src="~/admin/dist/img/logo-dashboard.png" class="brand-image" style="opacity: .8" />*@
-                <span class="brand-text fw-bold" style="color:#FFFFFF">(Nama Rumah Sakit)</span>
+                <span class="brand-text fw-bold" style="color:#FFFFFF">RS MMC Purchasing System</span>
             </a>
 
             <!-- Sidebar -->
@@ -144,20 +144,21 @@
                                     Purchase Request @*<span class="float-right badge bg-info">@ViewBag.CountPurchaseRequestStatus</span>*@
                                 </p>
                             </a>
-                        </li>
-                        <li class="@(ViewBag.Active == "Approval" ? "nav-item menu-open active":"")">
-                            <a asp-action="Index" is-active-route asp-controller="Approval" asp-area="Order" class="nav-link">
-                                <i class="nav-icon fas fa-cart-plus" style="color:#FFFFFF"></i>
-                                <p style="color:#FFFFFF">
-                                    Approval @*<span class="float-right badge bg-info">@ViewBag.CountPurchaseRequestStatus</span>*@
-                                </p>
-                            </a>
-                        </li>
+                        </li>                        
                         <li class="@(ViewBag.Active == "PurchaseOrder" ? "nav-item menu-open active":"")">
                             <a asp-action="Index" is-active-route asp-controller="PurchaseOrder" asp-area="Order" class="nav-link">
                                 <i class="nav-icon fas fa-shopping-bag" style="color:#FFFFFF"></i>
                                 <p style="color:#FFFFFF">
                                     Purchase Order @*<span class="float-right badge bg-info">@ViewBag.CountPurchaseRequestStatus</span>*@
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-header">Approval</li>
+                        <li class="@(ViewBag.Active == "Approval" ? "nav-item menu-open active":"")">
+                            <a asp-action="Index" is-active-route asp-controller="Approval" asp-area="Order" class="nav-link">
+                                <i class="nav-icon fas fa-cart-plus" style="color:#FFFFFF"></i>
+                                <p style="color:#FFFFFF">
+                                    Approval @*<span class="float-right badge bg-info">@ViewBag.CountPurchaseRequestStatus</span>*@
                                 </p>
                             </a>
                         </li>

@@ -93,7 +93,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-2">
-                                <input autocomplete="off" class="form-control row-QtyReceive" type="number" pattern="/^-?\d+\.?\d*$/" onKeyUp="qtyInput(this.value)" onKeyPress="if(this.value.length==4) return false;" min="1" max="1000" id="QtyReceive" placeholder="Qty Receive">
+                                <input autocomplete="off" class="form-control row-QtyReceive" type="number" pattern="/^-?\d+\.?\d*$/" onKeyUp="qtyInput(this.value)" onKeyPress="if(this.value.length==6) return false;" min="1" max="1000" id="QtyReceive" placeholder="Qty Receive">
                                 <span class="error">Required !</span>
                             </div>
                             <div class="col-md-6">
@@ -139,8 +139,8 @@
                                         <th class="text-left" style="background-color:#7FB9EE"><div style="color:#ffffff">Product Name</div></th>
                                         <th class="text-left" style="background-color:#7FB9EE"><div style="color:#ffffff">Measure</div></th>
                                         <th class="text-center" style="background-color:#7FB9EE"><div style="color:#ffffff">Qty Order</div></th>
-                                        <th class="text-center" style="background-color:#7FB9EE"><div style="color:#ffffff">Qty Cancel</div></th>
-                                        <th class="text-center" style="background-color:#7FB9EE"><div style="color:#ffffff"></th>
+                                        <th class="text-center" style="background-color:#7FB9EE"><div style="color:#ffffff">Qty Receive</div></th>
+                                        <th class="text-center" style="background-color:#7FB9EE"><div style="color:#ffffff"></div></th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -283,7 +283,7 @@
                 var QtyReceive = parseInt($('#QtyReceive').val());
                 var QtyOrder = parseInt($('#QtyOrder').val());
 
-                if (QtyReceive == QtyOrder || QtyReceive != QtyOrder) {
+                if (QtyReceive == QtyOrder || QtyReceive <= QtyOrder) {
                     if (detailName.length >= 0) {
                         var isValidItem = true;
                         if ($('#productnumber').val().trim() == '') {

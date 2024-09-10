@@ -1,31 +1,32 @@
 ﻿@{
-    ViewData["Title"] = "List Purchase Request";
-    Layout = "~/Views/Shared/_TopNavbarPurchaseRequest.cshtml";
+    ViewData["Title"] = "List DueDate";
+    Layout = "~/Views/Shared/_TopNavbarMasterData.cshtml";
 }
 
-@using PurchasingSystemApps.Areas.Order.Models;
+@using Microsoft.AspNetCore.Identity;
+@using PurchasingSystemApps.Areas.MasterData.Models;
 @using PurchasingSystemApps.Models;
 
 @inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> signInManager
-@model IEnumerable<PurchaseRequest>
+@model IEnumerable<DueDate>
 
 <!-- Main content -->
 <section class="content">
-        <div class="row">
-            <div class="col-12">
-                <div class="card card-cyan">
-                    <div class="card-header">
-                        <h3 class="card-title" style="color:#ffffff">@ViewBag.Title</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                    <form enctype="multipart/form-data" asp-action="Index" asp-controller="PurchaseRequest" method="post" class="form-horizontal">
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-cyan">
+                <div class="card-header">
+                    <h3 class="card-title" style="color:#ffffff">@ViewBag.Title</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <form enctype="multipart/form-data" asp-action="Index" asp-controller="DueDate" method="post" class="form-horizontal">
                         <div class="row">
                             <div class="col-md-1">
                                 <div class="form-group">
                                     @if (signInManager.IsSignedIn(User))
                                     {
-                                        <a class="btn bg-indigo" asp-action="CreatePurchaseRequest" asp-controller="PurchaseRequest" asp-area="Order">
+                                        <a class="btn bg-indigo" asp-action="CreateDueDate" asp-controller="DueDate" asp-area="MasterData">
                                             <div style="color:#ffffff">Add New</div>
                                         </a>
                                     }
@@ -64,89 +65,50 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="card-body table-responsive p-0">
                             <table id="tblTemplate" class="table table-hover table-head-fixed text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>Create Date</th>
-                                        <th>Request By</th>
-                                        <th>Approve By</th>
-                                        <th>PR Number</th>
-                                        <th>Status</th>
-                                        @*<th>Grand Total</th>*@
+                                        <th>Value</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var pr in Model)
+                                    @foreach (var DueDate in Model)
                                     {
-                                        @if (pr.Status == "Not Approved")
-                                        {
-                                            <tr style="background-color:#E84855" data-href="@Url.Action("DetailPurchaseRequest", "PurchaseRequest", new {id=pr.PurchaseRequestId})">
-                                                <td style="color:#FFF"></td>
-                                                <td style="color:#FFF">@pr.CreateDateTime.ToString("dd MMMM yyyy")</td>
-                                                <td style="color:#FFF">@pr.ApplicationUser.NamaUser</td>
-                                                <td style="color:#FFF">@pr.UserApprove1.FullName</td>
-                                                <td style="color:#FFF">@pr.PurchaseRequestNumber</td>
-                                                <td style="color:#FFF"><b>@pr.Status</b></td>
-                                            </tr>
-                                        }
-                                        else if (pr.Status == "Approved")
-                                        {
-                                            <tr style="background-color:#FFFD82" data-href="@Url.Action("DetailPurchaseRequest", "PurchaseRequest", new {id=pr.PurchaseRequestId})">
-                                                <td></td>
-                                                <td>@pr.CreateDateTime.ToString("dd MMMM yyyy")</td>
-                                                <td>@pr.ApplicationUser.NamaUser</td>
-                                                <td>@pr.UserApprove1.FullName</td>
-                                                <td>@pr.PurchaseRequestNumber</td>
-                                                <td><b>@pr.Status</b</td>
-                                            </tr>
-                                        }
-                                        else
-                                        {
-                                            <tr data-href="@Url.Action("DetailPurchaseRequest", "PurchaseRequest", new {id=pr.PurchaseRequestId})">
-                                                <td></td>
-                                                <td>@pr.CreateDateTime.ToString("dd MMMM yyyy")</td>
-                                                <td>@pr.ApplicationUser.NamaUser</td>
-                                                <td>@pr.UserApprove1.FullName</td>
-                                                <td>@pr.PurchaseRequestNumber</td>
-                                                <td><b>@pr.Status</b></td>
-                                            </tr>
-                                        }
+
+                                        <tr data-href="@Url.Action("DetailDueDate", "DueDate", new {id=DueDate.DueDateId})">
+                                            <th></th>
+                                            <td>@DueDate.CreateDateTime.ToString("dd MMMM yyyy")</td>
+                                            <td>@DueDate.Value hari</td>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>
                         </div>
                         <span class="error">* Double click in the row table to get data</span>
                     </form>
-                    </div>                    
-                    <!-- /.card-body -->
-                    @if (TempData["SuccessMessage"] != null)
-                    {
-                        <script type="text/javascript">
-                            window.onload = function () {
-                                swal("Berhasil", '@TempData["SuccessMessage"]', "success");
-                            };
-                        </script>
-                    }
-                    @if (TempData["WarningMessage"] != null)
-                    {
-                        <script type="text/javascript">
-                            window.onload = function () {
-                                swal("Gagal Simpan", '@TempData["WarningMessage"]', "warning");
-                            };
-                        </script>
-                    }
                 </div>
-                <!-- /.card -->
+                <!-- /.card-body -->
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <script type="text/javascript">
+                        window.onload = function () {
+                            swal("Success", '@TempData["SuccessMessage"]', "success");
+                        };
+                    </script>
+                }
             </div>
+            <!-- /.card -->
         </div>
-        <!-- /.row -->
+    </div>
+    <!-- /.row -->
 </section>
 <!-- /.content -->
 @section Scripts{
     <script src="~/scripts/tabletemplate.js"></script>
-
     <script>
         $(function () {
             $('#tglAwalPencarian').datetimepicker({
@@ -192,10 +154,6 @@
         .container td {
             vertical-align: top;
         }
-
-        /*table tr td {
-            background-color: red;
-        }*/
 
         .tablecontainer table {
             width: 100%;

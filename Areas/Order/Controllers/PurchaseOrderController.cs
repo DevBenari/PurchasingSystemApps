@@ -142,8 +142,11 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
                 PurchaseRequestId = purchaseOrder.PurchaseRequestId,
                 PurchaseRequestNumber = purchaseOrder.PurchaseRequestNumber,
                 UserAccessId = purchaseOrder.UserAccessId,
-                UserApprovalId = purchaseOrder.UserApprovalId,
+                UserApprove1Id = purchaseOrder.UserApprove1Id,
+                UserApprove2Id = purchaseOrder.UserApprove2Id,
+                UserApprove3Id = purchaseOrder.UserApprove3Id,
                 TermOfPaymentId = purchaseOrder.TermOfPaymentId,
+                DueDate = purchaseOrder.DueDate,
                 Status = purchaseOrder.Status,
                 QtyTotal = purchaseOrder.QtyTotal,
                 GrandTotal = Math.Truncate(purchaseOrder.GrandTotal),
@@ -186,8 +189,11 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
             PurchaseOrder purchaseOrder = _applicationDbContext.PurchaseOrders
                 .Include(d => d.PurchaseOrderDetails)
                 .Include(u => u.ApplicationUser)
-                .Include(p => p.UserApproval)
+                .Include(a1 => a1.UserApprove1)
+                .Include(a2 => a2.UserApprove2)
+                .Include(a3 => a3.UserApprove3)
                 .Include(p => p.TermOfPayment)
+                .Include(e => e.DueDate)
                 .Where(p => p.PurchaseOrderId == Id).FirstOrDefault();
 
             _signInManager.IsSignedIn(User);
@@ -228,8 +234,11 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
                 PurchaseRequestNumber = purchaseOrder.PurchaseRequestNumber,
                 PurchaseOrderId = purchaseOrder.PurchaseOrderId,
                 UserAccessId = purchaseOrder.UserAccessId,
-                UserApprovalId = purchaseOrder.UserApprovalId,
+                UserApprove1Id = purchaseOrder.UserApprove1Id,
+                UserApprove2Id = purchaseOrder.UserApprove2Id,
+                UserApprove3Id = purchaseOrder.UserApprove3Id,
                 TermOfPaymentId = purchaseOrder.TermOfPaymentId,
+                DueDateId = purchaseOrder.DueDateId,
                 Status = purchaseOrder.Status,
                 QtyTotal = purchaseOrder.QtyTotal,
                 GrandTotal = Math.Truncate(purchaseOrder.GrandTotal),
@@ -318,8 +327,11 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
                 PurchaseRequestId = model.PurchaseRequestId,
                 PurchaseRequestNumber = model.PurchaseRequestNumber,
                 UserAccessId = getUser.Id.ToString(),
-                UserApprovalId = model.UserApprovalId,
+                UserApprove1Id = model.UserApprove1Id,
+                UserApprove2Id = model.UserApprove2Id,
+                UserApprove3Id = model.UserApprove3Id,
                 TermOfPaymentId = model.TermOfPaymentId,
+                DueDateId = model.DueDateId,
                 Status = "InProcess",
                 QtyTotal = model.QtyTotal,
                 GrandTotal = Math.Truncate(model.GrandTotal),
@@ -362,8 +374,11 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
             var CreateDate = DateTime.Now.ToString("dd MMMM yyyy");
             var PoNumber = purchaseOrder.PurchaseOrderNumber;
             var CreateBy = purchaseOrder.ApplicationUser.NamaUser;
-            var HeadDivision = purchaseOrder.UserApproval.FullName;
+            var UserApprove1 = purchaseOrder.UserApprove1.FullName;
+            var UserApprove2 = purchaseOrder.UserApprove2.FullName;
+            var UserApprove3 = purchaseOrder.UserApprove3.FullName;
             var TermOfPayment = purchaseOrder.TermOfPayment.TermOfPaymentName;
+            var DueDate = purchaseOrder.DueDate;
             var Note = purchaseOrder.Note;
             var GrandTotal = purchaseOrder.GrandTotal;
             var Tax = (GrandTotal / 100) * 11;
@@ -382,8 +397,11 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
             web.Report.SetParameterValue("PoNumber", PoNumber);
             web.Report.SetParameterValue("CreateDate", CreateDate);
             web.Report.SetParameterValue("CreateBy", CreateBy);
-            web.Report.SetParameterValue("HeadDivision", HeadDivision);
+            web.Report.SetParameterValue("UserApprove1", UserApprove1);
+            web.Report.SetParameterValue("UserApprove2", UserApprove2);
+            web.Report.SetParameterValue("UserApprove3", UserApprove3);
             web.Report.SetParameterValue("TermOfPayment", TermOfPayment);
+            web.Report.SetParameterValue("DueDate", DueDate);
             web.Report.SetParameterValue("Note", Note);
             web.Report.SetParameterValue("GrandTotal", GrandTotal);
             web.Report.SetParameterValue("Tax", Tax);

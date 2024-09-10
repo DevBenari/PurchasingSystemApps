@@ -28,6 +28,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<InitialStock> InitialStocks { get; set; }
     public DbSet<WarehouseLocation> WarehouseLocations { get; set; }
     public DbSet<UnitLocation> UnitLocations { get; set; }
+    public DbSet<DueDate> DueDates { get; set; }
     #endregion
 
     #region Areas Order

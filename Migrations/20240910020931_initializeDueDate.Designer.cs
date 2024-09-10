@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PurchasingSystemApps.Data;
 
@@ -11,9 +12,10 @@ using PurchasingSystemApps.Data;
 namespace PurchasingSystemApps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240910020931_initializeDueDate")]
+    partial class initializeDueDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -880,17 +882,12 @@ namespace PurchasingSystemApps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ApproveByUser1")
+                    b.Property<string>("ApproveBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ApproveByUser2")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ApproveByUser3")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("ApproveDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("CreateBy")
                         .HasColumnType("uniqueidentifier");
@@ -903,9 +900,6 @@ namespace PurchasingSystemApps.Migrations
 
                     b.Property<DateTime>("DeleteDateTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DueDateId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsCancel")
                         .HasColumnType("bit");
@@ -933,53 +927,20 @@ namespace PurchasingSystemApps.Migrations
                     b.Property<DateTime>("UpdateDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("User1ApproveDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("User1ApproveTime")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("User2ApproveDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("User2ApproveTime")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("User3ApproveDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("User3ApproveTime")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserAccessId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid?>("UserApprove1Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("UserApprove2Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("UserApprove3Id")
+                    b.Property<Guid?>("UserApprovalId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ApprovalId");
-
-                    b.HasIndex("DueDateId");
 
                     b.HasIndex("PurchaseRequestId");
 
                     b.HasIndex("UserAccessId");
 
-                    b.HasIndex("UserApprove1Id");
-
-                    b.HasIndex("UserApprove2Id");
-
-                    b.HasIndex("UserApprove3Id");
+                    b.HasIndex("UserApprovalId");
 
                     b.ToTable("OrdApproval", "dbo");
                 });
@@ -1001,9 +962,6 @@ namespace PurchasingSystemApps.Migrations
 
                     b.Property<DateTime>("DeleteDateTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DueDateId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("GrandTotal")
                         .HasColumnType("decimal(18,2)");
@@ -1048,18 +1006,10 @@ namespace PurchasingSystemApps.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid?>("UserApprove1Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("UserApprove2Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("UserApprove3Id")
+                    b.Property<Guid?>("UserApprovalId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("PurchaseOrderId");
-
-                    b.HasIndex("DueDateId");
 
                     b.HasIndex("PurchaseRequestId");
 
@@ -1067,11 +1017,7 @@ namespace PurchasingSystemApps.Migrations
 
                     b.HasIndex("UserAccessId");
 
-                    b.HasIndex("UserApprove1Id");
-
-                    b.HasIndex("UserApprove2Id");
-
-                    b.HasIndex("UserApprove3Id");
+                    b.HasIndex("UserApprovalId");
 
                     b.ToTable("OrdPurchaseOrder", "dbo");
                 });
@@ -1172,9 +1118,6 @@ namespace PurchasingSystemApps.Migrations
                     b.Property<DateTime>("DeleteDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("DueDateId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<decimal>("GrandTotal")
                         .HasColumnType("decimal(18,2)");
 
@@ -1211,28 +1154,16 @@ namespace PurchasingSystemApps.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid?>("UserApprove1Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("UserApprove2Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("UserApprove3Id")
+                    b.Property<Guid?>("UserApprovalId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("PurchaseRequestId");
-
-                    b.HasIndex("DueDateId");
 
                     b.HasIndex("TermOfPaymentId");
 
                     b.HasIndex("UserAccessId");
 
-                    b.HasIndex("UserApprove1Id");
-
-                    b.HasIndex("UserApprove2Id");
-
-                    b.HasIndex("UserApprove3Id");
+                    b.HasIndex("UserApprovalId");
 
                     b.ToTable("OrdPurchaseRequest", "dbo");
                 });
@@ -2338,11 +2269,6 @@ namespace PurchasingSystemApps.Migrations
 
             modelBuilder.Entity("PurchasingSystemApps.Areas.Order.Models.Approval", b =>
                 {
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.DueDate", "DueDate")
-                        .WithMany()
-                        .HasForeignKey("DueDateId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("PurchasingSystemApps.Areas.Order.Models.PurchaseRequest", "PurchaseRequest")
                         .WithMany()
                         .HasForeignKey("PurchaseRequestId")
@@ -2354,41 +2280,20 @@ namespace PurchasingSystemApps.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.UserActive", "UserApprove1")
+                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.UserActive", "UserApproval")
                         .WithMany()
-                        .HasForeignKey("UserApprove1Id")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.UserActive", "UserApprove2")
-                        .WithMany()
-                        .HasForeignKey("UserApprove2Id")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.UserActive", "UserApprove3")
-                        .WithMany()
-                        .HasForeignKey("UserApprove3Id")
+                        .HasForeignKey("UserApprovalId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("ApplicationUser");
 
-                    b.Navigation("DueDate");
-
                     b.Navigation("PurchaseRequest");
 
-                    b.Navigation("UserApprove1");
-
-                    b.Navigation("UserApprove2");
-
-                    b.Navigation("UserApprove3");
+                    b.Navigation("UserApproval");
                 });
 
             modelBuilder.Entity("PurchasingSystemApps.Areas.Order.Models.PurchaseOrder", b =>
                 {
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.DueDate", "DueDate")
-                        .WithMany()
-                        .HasForeignKey("DueDateId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("PurchasingSystemApps.Areas.Order.Models.PurchaseRequest", "PurchaseRequest")
                         .WithMany()
                         .HasForeignKey("PurchaseRequestId")
@@ -2405,34 +2310,18 @@ namespace PurchasingSystemApps.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.UserActive", "UserApprove1")
+                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.UserActive", "UserApproval")
                         .WithMany()
-                        .HasForeignKey("UserApprove1Id")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.UserActive", "UserApprove2")
-                        .WithMany()
-                        .HasForeignKey("UserApprove2Id")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.UserActive", "UserApprove3")
-                        .WithMany()
-                        .HasForeignKey("UserApprove3Id")
+                        .HasForeignKey("UserApprovalId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("ApplicationUser");
-
-                    b.Navigation("DueDate");
 
                     b.Navigation("PurchaseRequest");
 
                     b.Navigation("TermOfPayment");
 
-                    b.Navigation("UserApprove1");
-
-                    b.Navigation("UserApprove2");
-
-                    b.Navigation("UserApprove3");
+                    b.Navigation("UserApproval");
                 });
 
             modelBuilder.Entity("PurchasingSystemApps.Areas.Order.Models.PurchaseOrderDetail", b =>
@@ -2457,11 +2346,6 @@ namespace PurchasingSystemApps.Migrations
 
             modelBuilder.Entity("PurchasingSystemApps.Areas.Order.Models.PurchaseRequest", b =>
                 {
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.DueDate", "DueDate")
-                        .WithMany()
-                        .HasForeignKey("DueDateId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.TermOfPayment", "TermOfPayment")
                         .WithMany()
                         .HasForeignKey("TermOfPaymentId")
@@ -2473,32 +2357,16 @@ namespace PurchasingSystemApps.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.UserActive", "UserApprove1")
+                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.UserActive", "UserApproval")
                         .WithMany()
-                        .HasForeignKey("UserApprove1Id")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.UserActive", "UserApprove2")
-                        .WithMany()
-                        .HasForeignKey("UserApprove2Id")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.UserActive", "UserApprove3")
-                        .WithMany()
-                        .HasForeignKey("UserApprove3Id")
+                        .HasForeignKey("UserApprovalId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("ApplicationUser");
 
-                    b.Navigation("DueDate");
-
                     b.Navigation("TermOfPayment");
 
-                    b.Navigation("UserApprove1");
-
-                    b.Navigation("UserApprove2");
-
-                    b.Navigation("UserApprove3");
+                    b.Navigation("UserApproval");
                 });
 
             modelBuilder.Entity("PurchasingSystemApps.Areas.Order.Models.PurchaseRequestDetail", b =>

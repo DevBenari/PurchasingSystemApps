@@ -7,8 +7,11 @@ namespace PurchasingSystemApps.Areas.Order.ViewModels
         public Guid PurchaseRequestId { get; set; }
         public string PurchaseRequestNumber { get; set; }
         public string UserAccessId { get; set; }
-        public Guid? UserApprovalId { get; set; }
+        public Guid? UserApprove1Id { get; set; }
+        public Guid? UserApprove2Id { get; set; }
+        public Guid? UserApprove3Id { get; set; }
         public Guid? TermOfPaymentId { get; set; }
+        public Guid? DueDateId { get; set; }
         public string Status { get; set; }
         public int QtyTotal { get; set; }
         public decimal GrandTotal { get; set; }

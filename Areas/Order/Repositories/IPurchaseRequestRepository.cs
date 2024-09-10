@@ -34,7 +34,10 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
                 .Include(d => d.PurchaseRequestDetails)
                 .Include(u => u.ApplicationUser)
                 .Include(t => t.TermOfPayment)
-                .Include(a => a.UserApproval)
+                .Include(a1 => a1.UserApprove1)
+                .Include(a2 => a2.UserApprove2)
+                .Include(a3 => a3.UserApprove3)
+                .Include(e => e.DueDate)
                 .FirstOrDefault(p => p.PurchaseRequestId == Id);
 
             if (purchaseRequest != null)
@@ -45,13 +48,19 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
                     PurchaseRequestNumber = purchaseRequest.PurchaseRequestNumber,
                     UserAccessId = purchaseRequest.UserAccessId,
                     ApplicationUser = purchaseRequest.ApplicationUser,
-                    UserApprovalId = purchaseRequest.UserApprovalId,
-                    UserApproval = purchaseRequest.UserApproval,
+                    UserApprove1Id = purchaseRequest.UserApprove1Id,
+                    UserApprove1 = purchaseRequest.UserApprove1,
+                    UserApprove2Id = purchaseRequest.UserApprove2Id,
+                    UserApprove2 = purchaseRequest.UserApprove2,
+                    UserApprove3Id = purchaseRequest.UserApprove3Id,
+                    UserApprove3 = purchaseRequest.UserApprove3,
                     TermOfPaymentId = purchaseRequest.TermOfPaymentId,
                     TermOfPayment = purchaseRequest.TermOfPayment,                    
                     Status = purchaseRequest.Status,
                     QtyTotal = purchaseRequest.QtyTotal,
                     GrandTotal = purchaseRequest.GrandTotal,
+                    DueDateId = purchaseRequest.DueDateId,
+                    DueDate = purchaseRequest.DueDate,
                     Note = purchaseRequest.Note,
                     PurchaseRequestDetails = purchaseRequest.PurchaseRequestDetails,
                 };
@@ -67,7 +76,10 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
                 .Include(d => d.PurchaseRequestDetails)
                 .Include(u => u.ApplicationUser)
                 .Include(t => t.TermOfPayment)
-                .Include(y => y.UserApproval)
+                .Include(a1 => a1.UserApprove1)
+                .Include(a2 => a2.UserApprove2)
+                .Include(a3 => a3.UserApprove3)
+                .Include(e => e.DueDate)
                 .FirstOrDefaultAsync(a => a.PurchaseRequestId == Id);
         }
 
@@ -79,15 +91,21 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
                 PurchaseRequestNumber = purchaseRequest.PurchaseRequestNumber,
                 UserAccessId = purchaseRequest.UserAccessId,
                 ApplicationUser = purchaseRequest.ApplicationUser,
-                UserApprovalId = purchaseRequest.UserApprovalId,
-                UserApproval = purchaseRequest.UserApproval,
+                UserApprove1Id = purchaseRequest.UserApprove1Id,
+                UserApprove1 = purchaseRequest.UserApprove1,
+                UserApprove2Id = purchaseRequest.UserApprove2Id,
+                UserApprove2 = purchaseRequest.UserApprove2,
+                UserApprove3Id = purchaseRequest.UserApprove3Id,
+                UserApprove3 = purchaseRequest.UserApprove3,
                 TermOfPaymentId = purchaseRequest.TermOfPaymentId,
                 TermOfPayment = purchaseRequest.TermOfPayment,
                 Status = purchaseRequest.Status,
                 QtyTotal = purchaseRequest.QtyTotal,
                 GrandTotal = purchaseRequest.GrandTotal,
+                DueDateId = purchaseRequest.DueDateId,
+                DueDate = purchaseRequest.DueDate,
                 Note = purchaseRequest.Note,
-                PurchaseRequestDetails = purchaseRequest.PurchaseRequestDetails
+                PurchaseRequestDetails = purchaseRequest.PurchaseRequestDetails,
             }).ToListAsync();
         }
 
@@ -97,7 +115,10 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
                 .Include(d => d.PurchaseRequestDetails)
                 .Include(u => u.ApplicationUser)
                 .Include(t => t.TermOfPayment)
-                .Include(y => y.UserApproval)
+                .Include(a1 => a1.UserApprove1)
+                .Include(a2 => a2.UserApprove2)
+                .Include(a3 => a3.UserApprove3)
+                .Include(e => e.DueDate)
                 .ToList();
         }
 

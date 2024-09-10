@@ -32,7 +32,10 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
                 .Where(i => i.ApprovalId == Id)
                 .Include(u => u.ApplicationUser)
                 .Include(t => t.PurchaseRequest)
-                .Include(r => r.UserApproval)
+                .Include(a1 => a1.UserApprove1)
+                .Include(a2 => a2.UserApprove2)
+                .Include(a3 => a3.UserApprove3)
+                .Include(e => e.DueDate)
                 .FirstOrDefault(p => p.ApprovalId == Id);
 
             if (Approval != null)
@@ -44,9 +47,22 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
                     PurchaseRequestNumber = Approval.PurchaseRequestNumber,
                     UserAccessId = Approval.UserAccessId,
                     ApplicationUser = Approval.ApplicationUser,
-                    UserApprovalId = Approval.UserApprovalId,
-                    ApproveDate = Approval.ApproveDate,
-                    ApproveBy = Approval.ApproveBy,
+                    //User 1
+                    UserApprove1Id = Approval.UserApprove1Id,
+                    ApproveByUser1 = Approval.ApproveByUser1,
+                    User1ApproveTime = Approval.User1ApproveTime,
+                    User1ApproveDate = Approval.User1ApproveDate,
+                    //User 2
+                    UserApprove2Id = Approval.UserApprove2Id,
+                    ApproveByUser2 = Approval.ApproveByUser2,
+                    User2ApproveTime = Approval.User2ApproveTime,
+                    User2ApproveDate = Approval.User2ApproveDate,
+                    //User 3
+                    UserApprove3Id = Approval.UserApprove3Id,
+                    ApproveByUser3 = Approval.ApproveByUser3,
+                    User3ApproveTime = Approval.User3ApproveTime,
+                    User3ApproveDate = Approval.User3ApproveDate,
+                    
                     Status = Approval.Status,
                     Note = Approval.Note
                 };
@@ -69,9 +85,22 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
                 PurchaseRequestNumber = Approval.PurchaseRequestNumber,
                 UserAccessId = Approval.UserAccessId,
                 ApplicationUser = Approval.ApplicationUser,
-                UserApprovalId = Approval.UserApprovalId,
-                ApproveDate = Approval.ApproveDate,
-                ApproveBy = Approval.ApproveBy,
+                //User 1
+                UserApprove1Id = Approval.UserApprove1Id,
+                ApproveByUser1 = Approval.ApproveByUser1,
+                User1ApproveTime = Approval.User1ApproveTime,
+                User1ApproveDate = Approval.User1ApproveDate,
+                //User 2
+                UserApprove2Id = Approval.UserApprove2Id,
+                ApproveByUser2 = Approval.ApproveByUser2,
+                User2ApproveTime = Approval.User2ApproveTime,
+                User2ApproveDate = Approval.User2ApproveDate,
+                //User 3
+                UserApprove3Id = Approval.UserApprove3Id,
+                ApproveByUser3 = Approval.ApproveByUser3,
+                User3ApproveTime = Approval.User3ApproveTime,
+                User3ApproveDate = Approval.User3ApproveDate,
+
                 Status = Approval.Status,
                 Note = Approval.Note
             }).ToListAsync();
@@ -82,7 +111,10 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
             return _context.Approvals.OrderByDescending(c => c.CreateDateTime)
                 .Include(u => u.ApplicationUser)
                 .Include(t => t.PurchaseRequest)
-                .Include(r => r.UserApproval)
+                .Include(a1 => a1.UserApprove1)
+                .Include(a2 => a2.UserApprove2)
+                .Include(a3 => a3.UserApprove3)
+                .Include(e => e.DueDate)
                 .ToList();
         }
 

@@ -50,37 +50,38 @@ AddScope();
 builder.Services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaims>();
 
 #region Areas Master Data
-builder.Services.AddScoped<IUserActiveRepository, IUserActiveRepository>();
-builder.Services.AddScoped<IPrincipalRepository, IPrincipalRepository>();
-builder.Services.AddScoped<IDiscountRepository, IDiscountRepository>();
-builder.Services.AddScoped<IMeasurementRepository, IMeasurementRepository>();
-builder.Services.AddScoped<ICategoryRepository, ICategoryRepository>();
-builder.Services.AddScoped<ITermOfPaymentRepository, ITermOfPaymentRepository>();
-builder.Services.AddScoped<IBankRepository, IBankRepository>();
-builder.Services.AddScoped<IProductRepository, IProductRepository>();
-builder.Services.AddScoped<ILeadTimeRepository, ILeadTimeRepository>();
-builder.Services.AddScoped<IInitialStockRepository, IInitialStockRepository>();
-builder.Services.AddScoped<IWarehouseLocationRepository, IWarehouseLocationRepository>();
-builder.Services.AddScoped<IUnitLocationRepository, IUnitLocationRepository>();
+builder.Services.AddScoped<IUserActiveRepository>();
+builder.Services.AddScoped<IPrincipalRepository>();
+builder.Services.AddScoped<IDiscountRepository>();
+builder.Services.AddScoped<IMeasurementRepository>();
+builder.Services.AddScoped<ICategoryRepository>();
+builder.Services.AddScoped<ITermOfPaymentRepository>();
+builder.Services.AddScoped<IBankRepository>();
+builder.Services.AddScoped<IProductRepository>();
+builder.Services.AddScoped<ILeadTimeRepository>();
+builder.Services.AddScoped<IInitialStockRepository>();
+builder.Services.AddScoped<IWarehouseLocationRepository>();
+builder.Services.AddScoped<IUnitLocationRepository>();
+builder.Services.AddScoped<IDueDateRepository>();
 #endregion
 
 #region Areas Order
-builder.Services.AddScoped<IPurchaseRequestRepository, IPurchaseRequestRepository>();
-builder.Services.AddScoped<IApprovalRepository, IApprovalRepository>();
-builder.Services.AddScoped<IPurchaseOrderRepository, IPurchaseOrderRepository>();
-builder.Services.AddScoped<IQtyDifferenceRequestRepository, IQtyDifferenceRequestRepository>();
+builder.Services.AddScoped<IPurchaseRequestRepository>();
+builder.Services.AddScoped<IApprovalRepository>();
+builder.Services.AddScoped<IPurchaseOrderRepository>();
+builder.Services.AddScoped<IQtyDifferenceRequestRepository>();
 #endregion
 
 #region Areas Warehouse
-builder.Services.AddScoped<IReceiveOrderRepository, IReceiveOrderRepository>();
-builder.Services.AddScoped<IWarehouseRequestRepository, IWarehouseRequestRepository>();
-builder.Services.AddScoped<IWarehouseTransferRepository, IWarehouseTransferRepository>();
-builder.Services.AddScoped<IQtyDifferenceRepository, IQtyDifferenceRepository>();
+builder.Services.AddScoped<IReceiveOrderRepository>();
+builder.Services.AddScoped<IWarehouseRequestRepository>();
+builder.Services.AddScoped<IWarehouseTransferRepository>();
+builder.Services.AddScoped<IQtyDifferenceRepository>();
 #endregion
 
 #region Areas Unit Request
-builder.Services.AddScoped<IUnitRequestRepository, IUnitRequestRepository>();
-builder.Services.AddScoped<IApprovalRequestRepository, IApprovalRequestRepository>();
+builder.Services.AddScoped<IUnitRequestRepository>();
+builder.Services.AddScoped<IApprovalRequestRepository>();
 #endregion
 
 //Initialize Fast Report

@@ -36,36 +36,36 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" asp-for="UserApprovalId">
+                        <label class="col-sm-2 col-form-label" asp-for="UserApprove1Id">
                             Approve By User 1
                         </label>
                         <div class="col-sm-10">
-                            <select asp-for="UserApprovalId" asp-items="@ViewBag.Approval" class="form-control select2bs4" id="userapprovalid" style="width: 100%;">
+                            <select asp-for="UserApprove1Id" asp-items="@ViewBag.Approval" class="form-control select2bs4" id="UserApprove1Id" style="width: 100%;">
                                 <option value="" hidden disabled selected>--Choose User--</option>
                             </select>
-                            <span asp-validation-for="UserApprovalId" class="error"></span>
+                            <span asp-validation-for="UserApprove1Id" class="error"></span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" asp-for="UserApprovalId">
+                        <label class="col-sm-2 col-form-label" asp-for="UserApprove2Id">
                             Approve By User 2
                         </label>
                         <div class="col-sm-10">
-                            <select asp-for="UserApprovalId" asp-items="@ViewBag.Approval" class="form-control select2bs4" id="userapprovalid" style="width: 100%;">
+                            <select asp-for="UserApprove2Id" asp-items="@ViewBag.Approval" class="form-control select2bs4" id="UserApprove2Id" style="width: 100%;">
                                 <option value="" hidden disabled selected>--Choose User--</option>
                             </select>
-                            <span asp-validation-for="UserApprovalId" class="error"></span>
+                            <span asp-validation-for="UserApprove2Id" class="error"></span>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" asp-for="UserApprovalId">
+                        <label class="col-sm-2 col-form-label" asp-for="UserApprove3Id">
                             Approve By User 3
                         </label>
                         <div class="col-sm-10">
-                            <select asp-for="UserApprovalId" asp-items="@ViewBag.Approval" class="form-control select2bs4" id="userapprovalid" style="width: 100%;">
+                            <select asp-for="UserApprove3Id" asp-items="@ViewBag.Approval" class="form-control select2bs4" id="UserApprove3Id" style="width: 100%;">
                                 <option value="" hidden disabled selected>--Choose User--</option>
                             </select>
-                            <span asp-validation-for="UserApprovalId" class="error"></span>
+                            <span asp-validation-for="UserApprove3Id" class="error"></span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -78,7 +78,18 @@
                             </select>
                             <span asp-validation-for="TermOfPaymentId" class="error"></span>
                         </div>
-                    </div>                    
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" asp-for="DueDateId">
+                            Due Date
+                        </label>
+                        <div class="col-sm-10">
+                            <select asp-for="DueDateId" asp-items="@ViewBag.DueDate" class="form-control select2bs4" id="DueDateId" style="width: 100%;">
+                                <option value="" hidden disabled selected>--Choose Due Date--</option>
+                            </select>
+                            <span asp-validation-for="DueDateId" class="error"></span>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" asp-for="Note">Note</label>
                         <div class="col-sm-10">

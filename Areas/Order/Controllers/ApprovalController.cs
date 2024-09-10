@@ -87,7 +87,7 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
             }
             else 
             {
-                var data = _approvalRepository.GetAllApproval().Where(u => u.UserApprovalId == getUserActive.UserActiveId).ToList();
+                var data = _approvalRepository.GetAllApproval().Where(u => u.UserApprove1Id == getUserActive.UserActiveId).ToList();
                 return View(data);
             }                        
         }
@@ -130,9 +130,23 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
                 PurchaseRequestId = Approval.PurchaseRequestId,
                 PurchaseRequestNumber = Approval.PurchaseRequestNumber,
                 UserAccessId = Approval.UserAccessId,
-                UserApprovalId = Approval.UserApprovalId,
-                ApproveDate = Approval.ApproveDate,
-                ApproveBy = getUser.NamaUser,
+                //User 1
+                UserApprove1Id = Approval.UserApprove1Id,
+                User1ApproveTime = Approval.User1ApproveTime,
+                ApproveByUser1 = getUser.NamaUser,
+                User1ApproveDate = Approval.User1ApproveDate,
+                //User 2
+                UserApprove2Id = Approval.UserApprove2Id,
+                User2ApproveTime = Approval.User2ApproveTime,
+                ApproveByUser2 = getUser.NamaUser,
+                User2ApproveDate = Approval.User2ApproveDate,
+                //User 3
+                UserApprove3Id = Approval.UserApprove3Id,
+                User3ApproveTime = Approval.User3ApproveTime,
+                ApproveByUser3 = getUser.NamaUser,
+                User3ApproveDate = Approval.User3ApproveDate,
+
+                DueDateId = Approval.DueDateId,
                 Status = Approval.Status,
                 Note = Approval.Note
             };
@@ -179,8 +193,10 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
 
                 if (approval.Status == "Approved" || approval.Status == "Rejected")
                 {
-                    approval.ApproveDate = DateTime.Now;
-                    approval.ApproveBy = viewModel.ApproveBy;
+                    //Belum di sesuaikan
+
+                    //approval.ApproveDate = DateTime.Now;
+                    //approval.ApproveBy = viewModel.ApproveBy;
                 }
 
                 var checkApprove = _approvalRepository.GetAllApproval().Where(a => a.PurchaseRequestNumber == viewModel.PurchaseRequestNumber).ToList();                

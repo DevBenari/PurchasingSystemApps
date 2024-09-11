@@ -29,6 +29,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<WarehouseLocation> WarehouseLocations { get; set; }
     public DbSet<UnitLocation> UnitLocations { get; set; }
     public DbSet<DueDate> DueDates { get; set; }
+    public DbSet<Department> Departments { get; set; }
+    public DbSet<Position> Positions { get; set; }
     #endregion
 
     #region Areas Order

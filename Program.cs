@@ -63,6 +63,8 @@ builder.Services.AddScoped<IInitialStockRepository>();
 builder.Services.AddScoped<IWarehouseLocationRepository>();
 builder.Services.AddScoped<IUnitLocationRepository>();
 builder.Services.AddScoped<IDueDateRepository>();
+builder.Services.AddScoped<IDepartmentRepository>();
+builder.Services.AddScoped<IPositionRepository>();
 #endregion
 
 #region Areas Order

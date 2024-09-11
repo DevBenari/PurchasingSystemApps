@@ -1,131 +1,199 @@
-﻿@{
+﻿@using PurchasingSystemApps.Areas.MasterData.ViewModels;
+
+@{
     Layout = "~/Views/Shared/_TopNavbarHome.cshtml";
+    var photoPath = "~/UserPhoto/" + (Model.UserPhotoPath ?? "user.jpg");
 }
+
+@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> signInManager
+@model UserActiveViewModel
 
 <!-- Main content -->
 <section class="content">
-    <div class="row mb-2">
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <a asp-controller="Dashboard" asp-action="Index" asp-area="MasterData">
-                <div class="small-box " style="background-color:#347FC4">
-                    @*change color in adminlte.min.cs*@
-                    <div class="inner">
-                        <h4 class="fw-bold" style="color:#ffffff">Master Data</h4>
-                        <p style="color:#ffffff">Master Data</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-table"></i>
-                    </div>                    
-                </div>
-            </a>
+    <div class="row">
+        <div class="col-md-3 bg-white">
+            <div class="card-header bg-cyan">
+                <h3 class="card-title fw-bold" style="color:#ffffff">Profile</h3>
+            </div>            
+
+            <img src="@photoPath" asp-append-version="true" width="300" height="300" />
         </div>
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <a asp-controller="PurchaseRequest" asp-action="Index" asp-area="Order">
-                <div class="small-box " style="background-color:#347FC4">
-                    @*change color in adminlte.min.cs*@
-                    <div class="inner">
-                        <h4 class="fw-bold" style="color:#ffffff">Purchase Request</h4>
-                        <p style="color:#ffffff">Purchase Request</p>
+        <div class="col-md-9 bg-white">
+            <div class="card-header bg-cyan">
+                <h3 class="card-title fw-bold" style="color:#ffffff">Detail</h3>
+            </div>
+
+            <form enctype="multipart/form-data" asp-controller="UserActive" asp-action="DetailUserActive" method="post" class="form-horizontal">
+                <div class="card-body">
+                    <input hidden asp-for="UserActiveId" />
+                    <input hidden asp-for="UserPhotoPath" />
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" asp-for="UserActiveCode">User Code</label>
+                        <div class="col-sm-9">
+                            <input type="text" asp-for="UserActiveCode" class="form-control form-control-border border-width-2" id="useractivecode" placeholder="User Active Code" readonly disabled>
+                        </div>
                     </div>
-                    <div class="icon">
-                        <i class="fas fa-cart-plus"></i>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" asp-for="FullName">FullName</label>
+                        <div class="col-sm-9">
+                            <input maxlength="100" autocomplete="off" type="text" asp-for="FullName" class="form-control form-control-border border-width-2" id="fullname" placeholder="FullName" disabled>
+                        </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" asp-for="IdentityNumber">Identity Number</label>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-id-badge"></i></span>
+                            </div>
+                            <input asp-for="IdentityNumber" type="text" class="form-control form-control-border border-width-2" autofocus autocomplete="off" id="identitynumber" placeholder="Identity Number" data-inputmask='"mask": "9999999999999999"' data-mask-identitas disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" asp-for="PlaceOfBirth">Place Of Birth</label>
+                        <div class="col-sm-9">
+                            <input maxlength="100" autocomplete="off" type="text" asp-for="PlaceOfBirth" class="form-control form-control-border border-width-2" id="placeofbirth" placeholder="Place Of Birth" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" asp-for="DateOfBirth">Date Of Birth</label>
+                        <div class="col-sm-9 input-group date" id="tanggallahir" data-target-input="nearest">
+                            <div class="input-group-append" data-target="#tanggallahir" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                            <input asp-for="DateOfBirth" type="text" class="form-control datetimepicker-input" data-target="#tanggallahir" id="dateofbirth" placeholder="Date Of Birth" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" asp-for="Gender">Gender</label>
+                        <div class="col-sm-9">
+                            <select asp-for="Gender" class="form-control select2bs4" style="width: 100%;" id="gender" disabled>
+                                <option value="" hidden disabled selected>--Chioce Gender--</option>
+                                <option value="Laki-Laki">Laki-Laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" asp-for="Address">Address</label>
+                        <div class="col-sm-9">
+                            <input maxlength="100" autocomplete="off" type="text" asp-for="Address" class="form-control form-control-border border-width-2" id="address" placeholder="Address" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" asp-for="Handphone">Handphone</label>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                            </div>
+                            <input asp-for="Handphone" autocomplete="off" type="text" class="form-control form-control-border border-width-2" id="handphone" data-inputmask='"mask": "(9999) - 9999-9999-9"' data-mask-hp disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" asp-for="Email">Email</label>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            </div>
+                            <input maxlength="100" autofocus autocomplete="off" asp-for="Email" type="email" class="form-control form-control-border border-width-2" id="email" placeholder="Email" disabled>
+                        </div>
+                    </div>
+                   @* <div class="form-group row">
+                        <label class="col-sm-3 col-form-label" asp-for="Foto">Photo</label>
+                        <div class="col-sm-9">
+                            <div class="col-sm-9">
+                                <img src="@photoPath" asp-append-version="true" width="300" height="300" />
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="custom-file">
+                                    <input asp-for="Foto" class="form-control custom-file-input" id="foto" disabled>
+                                    <label class="custom-file-label">Change Photos...</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
                 </div>
-            </a>
-        </div>
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <a asp-controller="Approval" asp-action="Index" asp-area="Order">
-                <div class="small-box " style="background-color:#347FC4">
-                    @*change color in adminlte.min.cs*@
-                    <div class="inner">
-                        <h4 class="fw-bold" style="color:#ffffff">Approval</h4>
-                        <p style="color:#ffffff">Approval</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-user-check"></i>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <a asp-controller="PurchaseOrder" asp-action="Index" asp-area="Order">
-                <div class="small-box " style="background-color:#347FC4">
-                    @*change color in adminlte.min.cs*@
-                    <div class="inner">
-                        <h4 class="fw-bold" style="color:#ffffff">Purchase Order</h4>
-                        <p style="color:#ffffff">Purchase Order</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <a asp-controller="UnitRequest" asp-action="Index" asp-area="Transaction">
-                <div class="small-box " style="background-color:#347FC4">
-                    @*change color in adminlte.min.cs*@
-                    <div class="inner">
-                        <h4 class="fw-bold" style="color:#ffffff">Unit Request</h4>
-                        <p style="color:#ffffff">Unit Request</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-first-aid"></i>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <a asp-controller="ReceiveOrder" asp-action="Index" asp-area="Warehouse">
-                <div class="small-box " style="background-color:#347FC4">
-                    @*change color in adminlte.min.cs*@
-                    <div class="inner">
-                        <h4 class="fw-bold" style="color:#ffffff">Receive Order</h4>
-                        <p style="color:#ffffff">Receive Order</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-luggage-cart"></i>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <a asp-controller="WarehouseTransfer" asp-action="Index" asp-area="Warehouse">
-                <div class="small-box " style="background-color:#347FC4">
-                    @*change color in adminlte.min.cs*@
-                    <div class="inner">
-                        <h4 class="fw-bold" style="color:#ffffff">Warehouse Transfer</h4>
-                        <p style="color:#ffffff">Warehouse Transfer</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-people-carry"></i>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <a asp-controller="QtyDifference" asp-action="Index" asp-area="Warehouse">
-                <div class="small-box " style="background-color:#347FC4">
-                    @*change color in adminlte.min.cs*@
-                    <div class="inner">
-                        <h4 class="fw-bold" style="color:#ffffff">Qty Difference</h4>
-                        <p style="color:#ffffff">Qty Difference</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-dice"></i>
-                    </div>
-                </div>
-            </a>
-        </div>
+                @section Scripts {
+                    <script>
+                        $(function () {
+                            //Initialize Select2 Elements
+                            $('.select2bs4').select2({
+                                theme: 'bootstrap4'
+                            })
+                        })
+                    </script>
+
+                    <script>
+                        $(function () {
+                            $("#btnsimpan").hide();
+                            $("#btnbatalubah").hide();
+
+                            $("#btnubah").click(function () {
+                                $("#btnubah").hide();
+                                $("#btnhapus").hide();
+                                $("#btnbatal").hide();
+                                $("#btnsimpan").show();
+                                $("#btnbatalubah").show();
+
+                                document.getElementById("useractivecode").disabled = false;
+                                document.getElementById("fullname").disabled = false;
+                                document.getElementById("identitynumber").disabled = false;
+                                document.getElementById("placeofbirth").disabled = false;
+                                document.getElementById("dateofbirth").disabled = false;
+                                document.getElementById("gender").disabled = false;
+                                document.getElementById("address").disabled = false;
+                                document.getElementById("handphone").disabled = false;
+                                document.getElementById("email").disabled = false;
+                                document.getElementById("foto").disabled = false;
+                            })
+
+                            $("#btnbatalubah").click(function () {
+                                $("#btnubah").show();
+                                $("#btnhapus").show();
+                                $("#btnbatal").show();
+                                $("#btnsimpan").hide();
+                                $("#btnbatalubah").hide();
+
+                                document.getElementById("useractivecode").disabled = true;
+                                document.getElementById("fullname").disabled = true;
+                                document.getElementById("identitynumber").disabled = true;
+                                document.getElementById("placeofbirth").disabled = true;
+                                document.getElementById("dateofbirth").disabled = true;
+                                document.getElementById("gender").disabled = true;
+                                document.getElementById("address").disabled = true;
+                                document.getElementById("handphone").disabled = true;
+                                document.getElementById("email").disabled = true;
+                                document.getElementById("foto").disabled = true;
+                            })
+                        })
+                    </script>
+
+                    <script>
+                        $(document).ready(function () {
+                            $('.custom-file-input').on("change", function () {
+                                var fileName = $(this).val().split("\\").pop();
+                                $(this).next('.custom-file-label').html(fileName);
+                            });
+                        });
+                    </script>
+
+                    <script>
+                        $(function () {
+                            //Data-Mask-Identitas
+                            $('[data-mask-identitas]').inputmask()
+
+                            //Data-Mask-Hp
+                            $('[data-mask-hp]').inputmask()
+
+                            //Tanggal Lahir
+                            $('#tanggallahir').datetimepicker({
+                                format: 'DD/MM/yyyy'
+                            })
+                        })
+                    </script>
+                }
+            </form>
+        </div>        
     </div>
-    <!-- /.row -->
+    <!-- /.row -->    
 </section>
 <!-- /.content -->

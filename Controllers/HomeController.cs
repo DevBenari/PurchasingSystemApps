@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PurchasingSystemApps.Areas.MasterData.Repositories;
+using PurchasingSystemApps.Areas.MasterData.ViewModels;
 using PurchasingSystemApps.Data;
 using PurchasingSystemApps.Models;
 using PurchasingSystemApps.Repositories;
@@ -14,19 +16,22 @@ namespace PurchasingSystemApps.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationDbContext _applicationDbContext;
+        private readonly IUserActiveRepository _userActiveRepository;
 
         public HomeController(ILogger<HomeController> logger,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            ApplicationDbContext context)
+            ApplicationDbContext context,
+            IUserActiveRepository userActiveRepository)
         {
             _logger = logger;
             _applicationDbContext = context;
             _userManager = userManager;
             _signInManager = signInManager;
+            _userActiveRepository = userActiveRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             ViewBag.Active = "Dashboard";
             var countUser = _applicationDbContext.UserActives.GroupBy(u => u.UserActiveId).Select(y => new
@@ -71,6 +76,35 @@ namespace PurchasingSystemApps.Controllers
             }).ToList();
             ViewBag.CountReceiveOrder = countReceiveOrder.Count;
 
+            var checkUserLogin = _userActiveRepository.GetAllUserLogin().Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            var user = _userActiveRepository.GetAllUser().Where(u => u.FullName == checkUserLogin.NamaUser).FirstOrDefault();
+
+            if (user != null) {
+                UserActiveViewModel viewModel = new UserActiveViewModel
+                {
+                    UserActiveId = user.UserActiveId,
+                    UserActiveCode = user.UserActiveCode,
+                    FullName = user.FullName,
+                    IdentityNumber = user.IdentityNumber,
+                    PlaceOfBirth = user.PlaceOfBirth,
+                    DateOfBirth = user.DateOfBirth,
+                    Gender = user.Gender,
+                    Address = user.Address,
+                    Handphone = user.Handphone,
+                    Email = user.Email,
+                    UserPhotoPath = user.Foto
+                };
+                return View(viewModel);
+            } else if (user == null && checkUserLogin.NamaUser == "SuperAdmin")
+            {
+                UserActiveViewModel viewModel = new UserActiveViewModel
+                {
+                    UserActiveCode = checkUserLogin.KodeUser,
+                    FullName = checkUserLogin.NamaUser,
+                    Email = checkUserLogin.Email
+                };
+                return View(viewModel);
+            }
             return View();
         }
 

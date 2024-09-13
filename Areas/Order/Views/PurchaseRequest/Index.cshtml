@@ -82,24 +82,46 @@
                                     {
                                         @if (pr.Status == "Not Approved")
                                         {
-                                            <tr style="background-color:#E84855" data-href="@Url.Action("DetailPurchaseRequest", "PurchaseRequest", new {id=pr.PurchaseRequestId})">
+                                            //Background Block Row
+                                            @*<tr style="background-color:#E84855" data-href="@Url.Action("DetailPurchaseRequest", "PurchaseRequest", new {id=pr.PurchaseRequestId})">
                                                 <td style="color:#FFF"></td>
                                                 <td style="color:#FFF">@pr.CreateDateTime.ToString("dd MMMM yyyy")</td>
                                                 <td style="color:#FFF">@pr.ApplicationUser.NamaUser</td>
                                                 <td style="color:#FFF">@pr.UserApprove1.FullName</td>
                                                 <td style="color:#FFF">@pr.PurchaseRequestNumber</td>
                                                 <td style="color:#FFF"><b>@pr.Status</b></td>
+                                            </tr>*@
+
+                                            //Background In Status
+                                            <tr data-href="@Url.Action("DetailPurchaseRequest", "PurchaseRequest", new {id=pr.PurchaseRequestId})">
+                                                <td></td>
+                                                <td>@pr.CreateDateTime.ToString("dd MMMM yyyy")</td>
+                                                <td>@pr.ApplicationUser.NamaUser</td>
+                                                <td>@pr.UserApprove1.FullName</td>
+                                                <td>@pr.PurchaseRequestNumber</td>
+                                                <td><span class="badge bg-danger"><b>@pr.Status</b></span></td>
                                             </tr>
                                         }
                                         else if (pr.Status == "Approved")
                                         {
-                                            <tr style="background-color:#FFFD82" data-href="@Url.Action("DetailPurchaseRequest", "PurchaseRequest", new {id=pr.PurchaseRequestId})">
+                                            //Background Block Row
+                                            @*<tr style="background-color:#FFFD82" data-href="@Url.Action("DetailPurchaseRequest", "PurchaseRequest", new {id=pr.PurchaseRequestId})">
                                                 <td></td>
                                                 <td>@pr.CreateDateTime.ToString("dd MMMM yyyy")</td>
                                                 <td>@pr.ApplicationUser.NamaUser</td>
                                                 <td>@pr.UserApprove1.FullName</td>
                                                 <td>@pr.PurchaseRequestNumber</td>
                                                 <td><b>@pr.Status</b</td>
+                                            </tr>*@
+
+                                            //Background In Status
+                                            <tr data-href="@Url.Action("DetailPurchaseRequest", "PurchaseRequest", new {id=pr.PurchaseRequestId})">
+                                                <td></td>
+                                                <td>@pr.CreateDateTime.ToString("dd MMMM yyyy")</td>
+                                                <td>@pr.ApplicationUser.NamaUser</td>
+                                                <td>@pr.UserApprove1.FullName</td>
+                                                <td>@pr.PurchaseRequestNumber</td>
+                                                <td><span class="badge bg-success"><b>@pr.Status</b></span></td>
                                             </tr>
                                         }
                                         else

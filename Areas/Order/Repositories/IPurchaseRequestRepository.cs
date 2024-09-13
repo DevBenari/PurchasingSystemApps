@@ -34,10 +34,16 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
                 .Include(d => d.PurchaseRequestDetails)
                 .Include(u => u.ApplicationUser)
                 .Include(t => t.TermOfPayment)
+                .Include(d1 => d1.Department1)
+                .Include(p1 => p1.Position1)
                 .Include(a1 => a1.UserApprove1)
+                .Include(d2 => d2.Department2)
+                .Include(p2 => p2.Position2)
                 .Include(a2 => a2.UserApprove2)
+                .Include(d3 => d3.Department3)
+                .Include(p3 => p3.Position3)
                 .Include(a3 => a3.UserApprove3)
-                .Include(e => e.DueDate)
+                .Include(e => e.DueDate)                
                 .FirstOrDefault(p => p.PurchaseRequestId == Id);
 
             if (purchaseRequest != null)
@@ -48,21 +54,33 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
                     PurchaseRequestNumber = purchaseRequest.PurchaseRequestNumber,
                     UserAccessId = purchaseRequest.UserAccessId,
                     ApplicationUser = purchaseRequest.ApplicationUser,
+                    DueDateId = purchaseRequest.DueDateId,
+                    DueDate = purchaseRequest.DueDate,
+                    Department1Id = purchaseRequest.Department1Id,
+                    Department1 = purchaseRequest.Department1,
+                    Position1Id = purchaseRequest.Position1Id,
+                    Position1 = purchaseRequest.Position1,
                     UserApprove1Id = purchaseRequest.UserApprove1Id,
                     UserApprove1 = purchaseRequest.UserApprove1,
+                    Department2Id = purchaseRequest.Department2Id,
+                    Department2 = purchaseRequest.Department2,
+                    Position2Id = purchaseRequest.Position2Id,
+                    Position2 = purchaseRequest.Position2,
                     UserApprove2Id = purchaseRequest.UserApprove2Id,
                     UserApprove2 = purchaseRequest.UserApprove2,
+                    Department3Id = purchaseRequest.Department3Id,
+                    Department3 = purchaseRequest.Department3,
+                    Position3Id = purchaseRequest.Position3Id,
+                    Position3 = purchaseRequest.Position3,
                     UserApprove3Id = purchaseRequest.UserApprove3Id,
                     UserApprove3 = purchaseRequest.UserApprove3,
                     TermOfPaymentId = purchaseRequest.TermOfPaymentId,
                     TermOfPayment = purchaseRequest.TermOfPayment,                    
                     Status = purchaseRequest.Status,
                     QtyTotal = purchaseRequest.QtyTotal,
-                    GrandTotal = purchaseRequest.GrandTotal,
-                    DueDateId = purchaseRequest.DueDateId,
-                    DueDate = purchaseRequest.DueDate,
+                    GrandTotal = purchaseRequest.GrandTotal,                    
                     Note = purchaseRequest.Note,
-                    PurchaseRequestDetails = purchaseRequest.PurchaseRequestDetails,
+                    PurchaseRequestDetails = purchaseRequest.PurchaseRequestDetails
                 };
                 return purchaseRequestDetail;
             }
@@ -76,8 +94,14 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
                 .Include(d => d.PurchaseRequestDetails)
                 .Include(u => u.ApplicationUser)
                 .Include(t => t.TermOfPayment)
+                .Include(d1 => d1.Department1)
+                .Include(p1 => p1.Position1)
                 .Include(a1 => a1.UserApprove1)
+                .Include(d2 => d2.Department2)
+                .Include(p2 => p2.Position2)
                 .Include(a2 => a2.UserApprove2)
+                .Include(d3 => d3.Department3)
+                .Include(p3 => p3.Position3)
                 .Include(a3 => a3.UserApprove3)
                 .Include(e => e.DueDate)
                 .FirstOrDefaultAsync(a => a.PurchaseRequestId == Id);
@@ -91,10 +115,24 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
                 PurchaseRequestNumber = purchaseRequest.PurchaseRequestNumber,
                 UserAccessId = purchaseRequest.UserAccessId,
                 ApplicationUser = purchaseRequest.ApplicationUser,
+                DueDateId = purchaseRequest.DueDateId,
+                DueDate = purchaseRequest.DueDate,
+                Department1Id = purchaseRequest.Department1Id,
+                Department1 = purchaseRequest.Department1,
+                Position1Id = purchaseRequest.Position1Id,
+                Position1 = purchaseRequest.Position1,
                 UserApprove1Id = purchaseRequest.UserApprove1Id,
                 UserApprove1 = purchaseRequest.UserApprove1,
+                Department2Id = purchaseRequest.Department2Id,
+                Department2 = purchaseRequest.Department2,
+                Position2Id = purchaseRequest.Position2Id,
+                Position2 = purchaseRequest.Position2,
                 UserApprove2Id = purchaseRequest.UserApprove2Id,
                 UserApprove2 = purchaseRequest.UserApprove2,
+                Department3Id = purchaseRequest.Department3Id,
+                Department3 = purchaseRequest.Department3,
+                Position3Id = purchaseRequest.Position3Id,
+                Position3 = purchaseRequest.Position3,
                 UserApprove3Id = purchaseRequest.UserApprove3Id,
                 UserApprove3 = purchaseRequest.UserApprove3,
                 TermOfPaymentId = purchaseRequest.TermOfPaymentId,
@@ -102,10 +140,8 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
                 Status = purchaseRequest.Status,
                 QtyTotal = purchaseRequest.QtyTotal,
                 GrandTotal = purchaseRequest.GrandTotal,
-                DueDateId = purchaseRequest.DueDateId,
-                DueDate = purchaseRequest.DueDate,
                 Note = purchaseRequest.Note,
-                PurchaseRequestDetails = purchaseRequest.PurchaseRequestDetails,
+                PurchaseRequestDetails = purchaseRequest.PurchaseRequestDetails
             }).ToListAsync();
         }
 
@@ -115,8 +151,14 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
                 .Include(d => d.PurchaseRequestDetails)
                 .Include(u => u.ApplicationUser)
                 .Include(t => t.TermOfPayment)
+                .Include(d1 => d1.Department1)
+                .Include(p1 => p1.Position1)
                 .Include(a1 => a1.UserApprove1)
+                .Include(d2 => d2.Department2)
+                .Include(p2 => p2.Position2)
                 .Include(a2 => a2.UserApprove2)
+                .Include(d3 => d3.Department3)
+                .Include(p3 => p3.Position3)
                 .Include(a3 => a3.UserApprove3)
                 .Include(e => e.DueDate)
                 .ToList();

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PurchasingSystemApps.Data;
 
@@ -11,9 +12,10 @@ using PurchasingSystemApps.Data;
 namespace PurchasingSystemApps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240913041638_updateColumnApproval")]
+    partial class updateColumnApproval
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1244,15 +1246,6 @@ namespace PurchasingSystemApps.Migrations
                     b.Property<DateTime>("DeleteDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("Department1Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("Department2Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("Department3Id")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("DueDateId")
                         .HasColumnType("uniqueidentifier");
 
@@ -1267,15 +1260,6 @@ namespace PurchasingSystemApps.Migrations
 
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("Position1Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("Position2Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("Position3Id")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PurchaseRequestNumber")
                         .IsRequired()
@@ -1312,19 +1296,7 @@ namespace PurchasingSystemApps.Migrations
 
                     b.HasKey("PurchaseRequestId");
 
-                    b.HasIndex("Department1Id");
-
-                    b.HasIndex("Department2Id");
-
-                    b.HasIndex("Department3Id");
-
                     b.HasIndex("DueDateId");
-
-                    b.HasIndex("Position1Id");
-
-                    b.HasIndex("Position2Id");
-
-                    b.HasIndex("Position3Id");
 
                     b.HasIndex("TermOfPaymentId");
 
@@ -2572,39 +2544,9 @@ namespace PurchasingSystemApps.Migrations
 
             modelBuilder.Entity("PurchasingSystemApps.Areas.Order.Models.PurchaseRequest", b =>
                 {
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.Department", "Department1")
-                        .WithMany()
-                        .HasForeignKey("Department1Id")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.Department", "Department2")
-                        .WithMany()
-                        .HasForeignKey("Department2Id")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.Department", "Department3")
-                        .WithMany()
-                        .HasForeignKey("Department3Id")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.DueDate", "DueDate")
                         .WithMany()
                         .HasForeignKey("DueDateId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.Position", "Position1")
-                        .WithMany()
-                        .HasForeignKey("Position1Id")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.Position", "Position2")
-                        .WithMany()
-                        .HasForeignKey("Position2Id")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.Position", "Position3")
-                        .WithMany()
-                        .HasForeignKey("Position3Id")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.TermOfPayment", "TermOfPayment")
@@ -2635,19 +2577,7 @@ namespace PurchasingSystemApps.Migrations
 
                     b.Navigation("ApplicationUser");
 
-                    b.Navigation("Department1");
-
-                    b.Navigation("Department2");
-
-                    b.Navigation("Department3");
-
                     b.Navigation("DueDate");
-
-                    b.Navigation("Position1");
-
-                    b.Navigation("Position2");
-
-                    b.Navigation("Position3");
 
                     b.Navigation("TermOfPayment");
 

@@ -15,11 +15,17 @@ namespace PurchasingSystemApps.Areas.Order.Models
         public Guid PurchaseRequestId { get; set; }
         public string PurchaseRequestNumber { get; set; }
         public string UserAccessId { get; set; }
-        public Guid? UserApprove1Id { get; set; }
-        public Guid? UserApprove2Id { get; set; }
-        public Guid? UserApprove3Id { get; set; }
-        public Guid? TermOfPaymentId { get; set; }
         public Guid? DueDateId { get; set; }
+        public Guid? Department1Id { get; set; }
+        public Guid? Position1Id { get; set; }
+        public Guid? UserApprove1Id { get; set; }
+        public Guid? Department2Id { get; set; }
+        public Guid? Position2Id { get; set; }
+        public Guid? UserApprove2Id { get; set; }
+        public Guid? Department3Id { get; set; }
+        public Guid? Position3Id { get; set; }
+        public Guid? UserApprove3Id { get; set; }
+        public Guid? TermOfPaymentId { get; set; }        
         public string Status { get; set; }
         public int QtyTotal { get; set; }
         public decimal GrandTotal { get; set; }
@@ -31,10 +37,22 @@ namespace PurchasingSystemApps.Areas.Order.Models
         public ApplicationUser? ApplicationUser { get; set; }     
         [ForeignKey("TermOfPaymentId")]
         public TermOfPayment? TermOfPayment { get; set; }
+        [ForeignKey("Department1Id")]
+        public Department? Department1 { get; set; }
+        [ForeignKey("Position1Id")]
+        public Position? Position1 { get; set; }
         [ForeignKey("UserApprove1Id")]
         public UserActive? UserApprove1 { get; set; }
+        [ForeignKey("Department2Id")]
+        public Department? Department2 { get; set; }
+        [ForeignKey("Position2Id")]
+        public Position? Position2 { get; set; }
         [ForeignKey("UserApprove2Id")]
         public UserActive? UserApprove2 { get; set; }
+        [ForeignKey("Department3Id")]
+        public Department? Department3 { get; set; }
+        [ForeignKey("Position3Id")]
+        public Position? Position3 { get; set; }
         [ForeignKey("UserApprove3Id")]
         public UserActive? UserApprove3 { get; set; }
         [ForeignKey("DueDateId")]

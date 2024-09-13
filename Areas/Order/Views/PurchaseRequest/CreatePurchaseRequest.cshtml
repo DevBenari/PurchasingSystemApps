@@ -26,8 +26,8 @@
                     {
                         <input asp-for="@User.Identity.Name" class="form-control" type="hidden">
                     }
-                    <input asp-for="Status" id="status" value="Not Approved" type="hidden">
-                    <input asp-for="UserAccessId" id="useraaccessid" type="hidden">
+                    <input asp-for="Status" id="status" value="Waiting Approval" type="hidden">
+                    <input asp-for="UserAccessId" id="UserAccessId" type="hidden">
 
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" asp-for="PurchaseRequestNumber">PR Number</label>
@@ -35,9 +35,158 @@
                             <input type="text" asp-for="PurchaseRequestNumber" class="form-control form-control-border border-width-2" id="purchaserequestnumber" placeholder="PR Number" readonly>
                         </div>
                     </div>
+
+                    @*Content Approve User 1*@
+                    <div class="col-md-12 bg-white">
+                        <div class="card-header bg-cyan">
+                            <h3 class="card-title fw-bold" style="color:#ffffff">User Approve 1</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" asp-for="Department1Id">
+                                    Department Name
+                                </label>
+                                <div class="col-sm-10">
+                                    <select asp-for="Department1Id" asp-items="@ViewBag.Department" class="form-control select2bs4" id="Department1List" style="width: 100%;">
+                                        <option value="" hidden disabled selected>--Choose Department--</option>
+                                    </select>
+                                    <span asp-validation-for="Department1Id" class="error"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" asp-for="Position1Id">
+                                    Position Name
+                                </label>
+                                <div class="col-sm-10">
+                                    <select asp-for="Position1Id" asp-items="@ViewBag.Position" class="form-control select2bs4" id="Position1List" style="width: 100%;">
+                                        <option value="" hidden disabled selected>--Choose Position--</option>
+                                    </select>
+                                    <span asp-validation-for="Position1Id" class="error"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" asp-for="UserApprove1Id">
+                                    User Approve
+                                </label>
+                                <div class="col-sm-10">
+                                    <select asp-for="UserApprove1Id" asp-items="@ViewBag.Approval" class="form-control select2bs4" id="UserApprove1List" style="width: 100%;">
+                                        <option value="" hidden disabled selected>--Choose User--</option>
+                                    </select>
+                                    <span asp-validation-for="UserApprove1Id" class="error"></span>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+
+                    @*Content Approve User 2*@
+                    <div class="col-md-12 bg-white">
+                        <div class="card-header bg-cyan">
+                            <h3 class="card-title fw-bold" style="color:#ffffff">User Approve 2</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" asp-for="Department2Id">
+                                    Department Name
+                                </label>
+                                <div class="col-sm-10">
+                                    <select asp-for="Department2Id" asp-items="@ViewBag.Department" class="form-control select2bs4" id="Department2List" style="width: 100%;">
+                                        <option value="" hidden disabled selected>--Choose Department--</option>
+                                    </select>
+                                    <span asp-validation-for="Department2Id" class="error"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" asp-for="Position2Id">
+                                    Position Name
+                                </label>
+                                <div class="col-sm-10">
+                                    <select asp-for="Position2Id" asp-items="@ViewBag.Position" class="form-control select2bs4" id="Position2List" style="width: 100%;">
+                                        <option value="" hidden disabled selected>--Choose Position--</option>
+                                    </select>
+                                    <span asp-validation-for="Position2Id" class="error"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" asp-for="UserApprove2Id">
+                                    User Approve
+                                </label>
+                                <div class="col-sm-10">
+                                    <select asp-for="UserApprove2Id" asp-items="@ViewBag.Approval" class="form-control select2bs4" id="UserApprove2List" style="width: 100%;">
+                                        <option value="" hidden disabled selected>--Choose User--</option>
+                                    </select>
+                                    <span asp-validation-for="UserApprove2Id" class="error"></span>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+
+                    @*Content Approve User 3*@
+                    <div class="col-md-12 bg-white">
+                        <div class="card-header bg-cyan">
+                            <h3 class="card-title fw-bold" style="color:#ffffff">User Approve 3</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" asp-for="Department3Id">
+                                    Department Name
+                                </label>
+                                <div class="col-sm-10">
+                                    <select asp-for="Department3Id" asp-items="@ViewBag.Department" class="form-control select2bs4" id="Department3List" style="width: 100%;">
+                                        <option value="" hidden disabled selected>--Choose Department--</option>
+                                    </select>
+                                    <span asp-validation-for="Department3Id" class="error"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" asp-for="Position3Id">
+                                    Position Name
+                                </label>
+                                <div class="col-sm-10">
+                                    <select asp-for="Position3Id" asp-items="@ViewBag.Position" class="form-control select2bs4" id="Position3List" style="width: 100%;">
+                                        <option value="" hidden disabled selected>--Choose Position--</option>
+                                    </select>
+                                    <span asp-validation-for="Position3Id" class="error"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label" asp-for="UserApprove3Id">
+                                    User Approve
+                                </label>
+                                <div class="col-sm-10">
+                                    <select asp-for="UserApprove3Id" asp-items="@ViewBag.Approval" class="form-control select2bs4" id="UserApprove3List" style="width: 100%;">
+                                        <option value="" hidden disabled selected>--Choose User--</option>
+                                    </select>
+                                    <span asp-validation-for="UserApprove3Id" class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="form-group row">
+                        <label class="col-sm-2 col-form-label" asp-for="UserApprove1Id">
+                            Department Name
+                        </label>
+                        <div class="col-sm-10">
+                            <select asp-for="UserApprove1Id" asp-items="@ViewBag.Approval" class="form-control select2bs4" id="UserApprove1Id" style="width: 100%;">
+                                <option value="" hidden disabled selected>--Choose User--</option>
+                            </select>
+                            <span asp-validation-for="UserApprove1Id" class="error"></span>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" asp-for="UserApprove1Id">
-                            Approve By User 1
+                            Position Name
+                        </label>
+                        <div class="col-sm-10">
+                            <select asp-for="UserApprove1Id" asp-items="@ViewBag.Approval" class="form-control select2bs4" id="UserApprove1Id" style="width: 100%;">
+                                <option value="" hidden disabled selected>--Choose User--</option>
+                            </select>
+                            <span asp-validation-for="UserApprove1Id" class="error"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" asp-for="UserApprove1Id">
+                            User Approve
                         </label>
                         <div class="col-sm-10">
                             <select asp-for="UserApprove1Id" asp-items="@ViewBag.Approval" class="form-control select2bs4" id="UserApprove1Id" style="width: 100%;">
@@ -67,13 +216,13 @@
                             </select>
                             <span asp-validation-for="UserApprove3Id" class="error"></span>
                         </div>
-                    </div>
+                    </div>*@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" asp-for="TermOfPaymentId">
                             Term Of Payment
                         </label>
                         <div class="col-sm-10">
-                            <select asp-for="TermOfPaymentId" asp-items="@ViewBag.TermOfPayment" class="form-control select2bs4" id="termofpayment" style="width: 100%;">
+                            <select asp-for="TermOfPaymentId" asp-items="@ViewBag.TermOfPayment" class="form-control select2bs4" id="TermOfPayment" style="width: 100%;">
                                 <option value="" hidden disabled selected>--Choose TOP--</option>
                             </select>
                             <span asp-validation-for="TermOfPaymentId" class="error"></span>
@@ -264,6 +413,147 @@
                     },
                     error: function (ex) {
                         alert('Please wait until the data..., ' + ex);
+                    }
+                });
+                return false;
+            })
+        })
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#Position1List").empty().append('<option value = "' + -1 + '">' + "--Choose Position--" + '</option>');
+            $("#UserApprove1List").empty().append('<option value = "' + -1 + '">' + "--Choose User--" + '</option>');
+
+            $("#Department1List").change(function () {
+                $("#Position1List").empty();
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("LoadPosition1")',
+                    dataType: 'json',
+                    data: { id: $("#Department1List").val() },
+                    success: function (positions) {
+                        $("#Position1List").append('<option value = "' + -1 + '">' + "--Choose Position--" + '</option>');
+                        $.each(positions, function (i, position) {
+                            $("#Position1List").append('<option value = "' + position.value + '">' + position.text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed get data Position !!!' + ex);
+                    }
+                });
+                return false;
+            })
+
+            $("#Position1List").change(function () {
+                $("#UserApprove1List").empty();
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("LoadUser1")',
+                    dataType: 'json',
+                    data: { id: $("#Position1List").val() },
+                    success: function (users) {
+                        $("#UserApprove1List").append('<option value = "' + -1 + '">' + "--Choose User--" + '</option>');
+                        $.each(users, function (i, user) {
+                            $("#UserApprove1List").append('<option value = "' + user.value + '">' + user.text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed get data User !!!' + ex);
+                    }
+                });
+                return false;
+            })
+        })
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#Position2List").empty().append('<option value = "' + -1 + '">' + "--Choose Position--" + '</option>');
+            $("#UserApprove2List").empty().append('<option value = "' + -1 + '">' + "--Choose User--" + '</option>');
+
+            $("#Department2List").change(function () {
+                $("#Position2List").empty();
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("LoadPosition2")',
+                    dataType: 'json',
+                    data: { id: $("#Department2List").val() },
+                    success: function (positions) {
+                        $("#Position2List").append('<option value = "' + -1 + '">' + "--Choose Position--" + '</option>');
+                        $.each(positions, function (i, position) {
+                            $("#Position2List").append('<option value = "' + position.value + '">' + position.text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed get data Position !!!' + ex);
+                    }
+                });
+                return false;
+            })
+
+            $("#Position2List").change(function () {
+                $("#UserApprove2List").empty();
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("LoadUser2")',
+                    dataType: 'json',
+                    data: { id: $("#Position2List").val() },
+                    success: function (users) {
+                        $("#UserApprove2List").append('<option value = "' + -1 + '">' + "--Choose User--" + '</option>');
+                        $.each(users, function (i, user) {
+                            $("#UserApprove2List").append('<option value = "' + user.value + '">' + user.text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed get data User !!!' + ex);
+                    }
+                });
+                return false;
+            })
+        })
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#Position3List").empty().append('<option value = "' + -1 + '">' + "--Choose Position--" + '</option>');
+            $("#UserApprove3List").empty().append('<option value = "' + -1 + '">' + "--Choose User--" + '</option>');
+
+            $("#Department3List").change(function () {
+                $("#Position3List").empty();
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("LoadPosition3")',
+                    dataType: 'json',
+                    data: { id: $("#Department3List").val() },
+                    success: function (positions) {
+                        $("#Position3List").append('<option value = "' + -1 + '">' + "--Choose Position--" + '</option>');
+                        $.each(positions, function (i, position) {
+                            $("#Position3List").append('<option value = "' + position.value + '">' + position.text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed get data Position !!!' + ex);
+                    }
+                });
+                return false;
+            })
+
+            $("#Position3List").change(function () {
+                $("#UserApprove3List").empty();
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("LoadUser3")',
+                    dataType: 'json',
+                    data: { id: $("#Position3List").val() },
+                    success: function (users) {
+                        $("#UserApprove3List").append('<option value = "' + -1 + '">' + "--Choose User--" + '</option>');
+                        $.each(users, function (i, user) {
+                            $("#UserApprove3List").append('<option value = "' + user.value + '">' + user.text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed get data User !!!' + ex);
                     }
                 });
                 return false;
@@ -612,8 +902,17 @@
                 var isAllValid = true;
                 var detailItemDone = [];
                 var detailDone = {};
-                var UserApprovalId = $('#userapprovalid').find(":selected").val();
-                var TermOfPayment = $('#termofpayment').find(":selected").val();
+                var Department1Id = $('#Department1List').find(":selected").val();
+                var Position1Id = $('#Position1List').find(":selected").val();
+                var UserApprove1Id = $('#UserApprove1List').find(":selected").val();
+                var Department2Id = $('#Department2List').find(":selected").val();
+                var Position2Id = $('#Position2List').find(":selected").val();
+                var UserApprove2Id = $('#UserApprove2List').find(":selected").val();
+                var Department3Id = $('#Department3List').find(":selected").val();
+                var Position3Id = $('#Position3List').find(":selected").val();
+                var UserApprove3Id = $('#UserApprove3List').find(":selected").val();
+                var DueDateId = $('#DueDateId').find(":selected").val();
+                var TermOfPayment = $('#TermOfPayment').find(":selected").val();
                 var detailTable = $('#tbldetailpr tbody').children().children().length;
 
                 if (detailTable == 1) { // 1 adalah isi dari keterangan pada table dihitung 1
@@ -623,25 +922,106 @@
                         type: "warning"
                     });
                     isAllValid = false;
-                } else if (detailTable != 1 && TermOfPayment == '' && UserApprovalId == '') {
-                    $('#userapprovalid').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
-                    $('#termofpayment').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                } else if (detailTable != 1 && TermOfPayment == '' && Department1Id == '' && Position1Id == '' && UserApprove1Id == '' && Department2Id == '' && Position2Id == '' && UserApprove2Id == '' && Department3Id == '' && Position3Id == '' && UserApprove3Id == '') {
+                    $('#Department1List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    $('#Position1List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    $('#UserApprove1List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    $('#Department2List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    $('#Position2List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    $('#UserApprove2List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    $('#Department3List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    $('#Position3List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    $('#UserApprove3List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    $('#DueDateId').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    $('#TermOfPayment').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
                     swal({
                         title: "Warning",
                         text: "Sorry, please select...",
                         type: "warning"
                     });
                     isAllValid = false;
-                } else if (detailTable != 1 && TermOfPayment == '' && UserApprovalId != '') {
-                    $('#termofpayment').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                } else if (detailTable != 1 && TermOfPayment == '' && DueDateId != '' && Department1Id != '' && Position1Id != '' && UserApprove1Id != '' && Department2Id != '' && Position2Id != '' && UserApprove2Id != '' && Department3Id != '' && Position3Id != '' && UserApprove3Id != '') {
+                    $('#TermOfPayment').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
                     swal({
                         title: "Warning",
                         text: "Sorry, please select...",
                         type: "warning"
                     });
                     isAllValid = false;
-                } else if (detailTable != 1 && TermOfPayment != '' && UserApprovalId == '') {
-                    $('#userapprovalid').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                } else if (detailTable != 1 && TermOfPayment != '' && DueDateId == '' && Department1Id != '' && Position1Id != '' && UserApprove1Id != '' && Department2Id != '' && Position2Id != '' && UserApprove2Id != '' && Department3Id != '' && Position3Id != '' && UserApprove3Id != '') {
+                    $('#DueDateId').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    swal({
+                        title: "Warning",
+                        text: "Sorry, please select...",
+                        type: "warning"
+                    });
+                    isAllValid = false;
+                } else if (detailTable != 1 && TermOfPayment != '' && DueDateId != '' && Department1Id == '' && Position1Id != '' && UserApprove1Id != '' && Department2Id != '' && Position2Id != '' && UserApprove2Id != '' && Department3Id != '' && Position3Id != '' && UserApprove3Id != '') {
+                    $('#Department1List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    swal({
+                        title: "Warning",
+                        text: "Sorry, please select...",
+                        type: "warning"
+                    });
+                    isAllValid = false;
+                } else if (detailTable != 1 && TermOfPayment != '' && DueDateId != '' && Department1Id != '' && Position1Id == '' && UserApprove1Id != '' && Department2Id != '' && Position2Id != '' && UserApprove2Id != '' && Department3Id != '' && Position3Id != '' && UserApprove3Id != '') {
+                    $('#Position1List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    swal({
+                        title: "Warning",
+                        text: "Sorry, please select...",
+                        type: "warning"
+                    });
+                    isAllValid = false;
+                } else if (detailTable != 1 && TermOfPayment != '' && DueDateId != '' && Department1Id != '' && Position1Id != '' && UserApprove1Id == '' && Department2Id != '' && Position2Id != '' && UserApprove2Id != '' && Department3Id != '' && Position3Id != '' && UserApprove3Id != '') {
+                    $('#UserApprove1List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    swal({
+                        title: "Warning",
+                        text: "Sorry, please select...",
+                        type: "warning"
+                    });
+                    isAllValid = false;
+                } else if (detailTable != 1 && TermOfPayment != '' && DueDateId != '' && Department1Id != '' && Position1Id != '' && UserApprove1Id != '' && Department2Id == '' && Position2Id != '' && UserApprove2Id != '' && Department3Id != '' && Position3Id != '' && UserApprove3Id != '') {
+                    $('#Department2List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    swal({
+                        title: "Warning",
+                        text: "Sorry, please select...",
+                        type: "warning"
+                    });
+                    isAllValid = false;
+                } else if (detailTable != 1 && TermOfPayment != '' && DueDateId != '' && Department1Id != '' && Position1Id != '' && UserApprove1Id != '' && Department2Id != '' && Position2Id == '' && UserApprove2Id != '' && Department3Id != '' && Position3Id != '' && UserApprove3Id != '') {
+                    $('#Position2List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    swal({
+                        title: "Warning",
+                        text: "Sorry, please select...",
+                        type: "warning"
+                    });
+                    isAllValid = false;
+                } else if (detailTable != 1 && TermOfPayment != '' && DueDateId != '' && Department1Id != '' && Position1Id != '' && UserApprove1Id != '' && Department2Id != '' && Position2Id != '' && UserApprove2Id == '' && Department3Id != '' && Position3Id != '' && UserApprove3Id != '') {
+                    $('#UserApprove2List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    swal({
+                        title: "Warning",
+                        text: "Sorry, please select...",
+                        type: "warning"
+                    });
+                    isAllValid = false;
+                } else if (detailTable != 1 && TermOfPayment != '' && DueDateId != '' && Department1Id != '' && Position1Id != '' && UserApprove1Id != '' && Department2Id != '' && Position2Id != '' && UserApprove2Id != '' && Department3Id == '' && Position3Id != '' && UserApprove3Id != '') {
+                    $('#Department3List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    swal({
+                        title: "Warning",
+                        text: "Sorry, please select...",
+                        type: "warning"
+                    });
+                    isAllValid = false;
+                } else if (detailTable != 1 && TermOfPayment != '' && DueDateId != '' && Department1Id != '' && Position1Id != '' && UserApprove1Id != '' && Department2Id != '' && Position2Id != '' && UserApprove2Id != '' && Department3Id != '' && Position3Id == '' && UserApprove3Id != '') {
+                    $('#Position3List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
+                    swal({
+                        title: "Warning",
+                        text: "Sorry, please select...",
+                        type: "warning"
+                    });
+                    isAllValid = false;
+                } else if (detailTable != 1 && TermOfPayment != '' && DueDateId != '' && Department1Id != '' && Position1Id != '' && UserApprove1Id != '' && Department2Id != '' && Position2Id != '' && UserApprove2Id != '' && Department3Id != '' && Position3Id != '' && UserApprove3Id == '') {
+                    $('#UserApprove3List').siblings('span.error').css('visibility', 'visible').html('<span style="color:red">Please select !</span>');
                     swal({
                         title: "Warning",
                         text: "Sorry, please select...",
@@ -650,8 +1030,17 @@
                     isAllValid = false;
                 } else {
                     //Sembunyikan pesan error
-                    $('#userapprovalid').siblings('span.error').css('visibility', 'hidden')
-                    $('#termofpayment').siblings('span.error').css('visibility', 'hidden')                    
+                    $('#Department1List').siblings('span.error').css('visibility', 'hidden')
+                    $('#Department2List').siblings('span.error').css('visibility', 'hidden')
+                    $('#Department3List').siblings('span.error').css('visibility', 'hidden')
+                    $('#Position1List').siblings('span.error').css('visibility', 'hidden')
+                    $('#Position2List').siblings('span.error').css('visibility', 'hidden')
+                    $('#Position3List').siblings('span.error').css('visibility', 'hidden')
+                    $('#UserApprove1List').siblings('span.error').css('visibility', 'hidden')
+                    $('#UserApprove2List').siblings('span.error').css('visibility', 'hidden')
+                    $('#UserApprove3List').siblings('span.error').css('visibility', 'hidden')
+                    $('#DueDateId').siblings('span.error').css('visibility', 'hidden')
+                    $('#TermOfPayment').siblings('span.error').css('visibility', 'hidden')
 
                     $("#tbldetailpr").find("tbody").children("tr").each(function (index, element) {
                         //***Penggunaan nama detail harus sesuai dengan nama pada table. Misal kodeproduk,namaproduk,dst harus sama.
@@ -668,9 +1057,18 @@
                     });
 
                     var PurchaseRequestNumber = $('#purchaserequestnumber').val();
-                    var UserAccessId = $('#useraaccessid').val();
-                    var UserApprovalId = $('#userapprovalid').val();
-                    var TermOfPaymentId = $('#termofpayment').val();
+                    var UserAccessId = $('#UserAccessId').val();
+                    var Department1Id = $('#Department1List').val();
+                    var Position1Id = $('#Position1List').val();
+                    var UserApprove1Id = $('#UserApprove1List').val();
+                    var Department1Id = $('#Department2List').val();
+                    var Position1Id = $('#Position2List').val();
+                    var UserApprove2Id = $('#UserApprove2List').val();
+                    var Department1Id = $('#Department3List').val();
+                    var Position1Id = $('#Position3List').val();
+                    var UserApprove3Id = $('#UserApprove3List').val();
+                    var DueDateId = $('#DueDateId').val();
+                    var TermOfPaymentId = $('#TermOfPayment').val();
                     var Status = $('#status').val();
                     var QtyTotal = $('.productTotalQty').text();
                     var GrandTotal = $('.productGrandTotal').text();
@@ -682,7 +1080,16 @@
                     var dataPost = {};
                     dataPost.PurchaseRequestNumber = PurchaseRequestNumber;
                     dataPost.UserAccessId = UserAccessId;
-                    dataPost.UserApprovalId = UserApprovalId;
+                    dataPost.Department1Id = Department1Id;
+                    dataPost.Position1Id = Position1Id;
+                    dataPost.UserApprove1Id = UserApprove1Id;
+                    dataPost.Department2Id = Department2Id;
+                    dataPost.Position2Id = Position2Id;
+                    dataPost.UserApprove2Id = UserApprove2Id;
+                    dataPost.Department3Id = Department3Id;
+                    dataPost.Position3Id = Position3Id;
+                    dataPost.UserApprove3Id = UserApprove3Id;
+                    dataPost.DueDateId = DueDateId;
                     dataPost.TermOfPaymentId = TermOfPaymentId;
                     dataPost.Status = Status;
                     dataPost.QtyTotal = QtyTotal;

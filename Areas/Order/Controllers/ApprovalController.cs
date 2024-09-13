@@ -63,14 +63,14 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
         {
             ViewBag.Active = "Order";
 
-            var countApproval = _applicationDbContext.Approvals.Where(p => p.Status == "Not Approved").GroupBy(u => u.PurchaseRequestId).Select(y => new
+            var countApproval = _applicationDbContext.Approvals.Where(p => p.Status == "Waiting Approval").GroupBy(u => u.PurchaseRequestId).Select(y => new
             {
                 ApprovalId = y.Key,
                 CountOfApprovals = y.Count()
             }).ToList();
             ViewBag.CountApproval= countApproval.Count;
 
-            var countPurchaseRequest = _applicationDbContext.PurchaseRequests.Where(p => p.Status == "Not Approved").GroupBy(u => u.PurchaseRequestId).Select(y => new
+            var countPurchaseRequest = _applicationDbContext.PurchaseRequests.Where(p => p.Status == "Waiting Approval").GroupBy(u => u.PurchaseRequestId).Select(y => new
             {
                 PurchaseRequestId = y.Key,
                 CountOfPurchaseRequests = y.Count()
@@ -87,7 +87,7 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
             }
             else 
             {
-                var data = _approvalRepository.GetAllApproval().Where(u => u.UserApprove1Id == getUserActive.UserActiveId).ToList();
+                var data = _approvalRepository.GetAllApproval().Where(u => u.UserApproveId == getUserActive.UserActiveId).ToList();
                 return View(data);
             }                        
         }
@@ -130,23 +130,11 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
                 PurchaseRequestId = Approval.PurchaseRequestId,
                 PurchaseRequestNumber = Approval.PurchaseRequestNumber,
                 UserAccessId = Approval.UserAccessId,
-                //User 1
-                UserApprove1Id = Approval.UserApprove1Id,
-                User1ApproveTime = Approval.User1ApproveTime,
-                ApproveByUser1 = getUser.NamaUser,
-                User1ApproveDate = Approval.User1ApproveDate,
-                //User 2
-                UserApprove2Id = Approval.UserApprove2Id,
-                User2ApproveTime = Approval.User2ApproveTime,
-                ApproveByUser2 = getUser.NamaUser,
-                User2ApproveDate = Approval.User2ApproveDate,
-                //User 3
-                UserApprove3Id = Approval.UserApprove3Id,
-                User3ApproveTime = Approval.User3ApproveTime,
-                ApproveByUser3 = getUser.NamaUser,
-                User3ApproveDate = Approval.User3ApproveDate,
-
                 DueDateId = Approval.DueDateId,
+                UserApproveId = Approval.UserApproveId,
+                ApproveTime = "",
+                ApproveBy = getUser.NamaUser,
+                ApproveDate = DateTime.Now,                
                 Status = Approval.Status,
                 Note = Approval.Note
             };
@@ -211,9 +199,9 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
                 }
                 _approvalRepository.Update(approval);
 
-                if (approval.Status == "Not Approved")
+                if (approval.Status == "Waiting Approval")
                 {
-                    TempData["SuccessMessage"] = "Number " + viewModel.PurchaseRequestNumber + " Not Approved";
+                    TempData["SuccessMessage"] = "Number " + viewModel.PurchaseRequestNumber + " Waiting Approval";
                 }
                 else if (approval.Status == "Approved")
                 {

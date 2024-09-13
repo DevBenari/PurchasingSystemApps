@@ -76,11 +76,11 @@
                                             <td>@pr.CreateDateTime.ToString("dd MMMM yyyy")</td>
                                             <td>@pr.ApplicationUser.NamaUser</td>
                                             <td>@pr.PurchaseRequestNumber</td>
-                                            <td>@pr.UserApprove1.FullName</td>
+                                            <td>@pr.UserApprove.FullName</td>
                                             @*<td>@pr.ApproveByUser1</td>
                                             <td>@pr.User1ApproveTime</td>
                                             <td>@pr.User1ApproveDate</td>*@
-                                            @if (pr.Status == "Not Approved")
+                                            @if (pr.Status == "Waiting Approval")
                                             {
                                                 <td><span class="badge bg-danger"><b>@pr.Status</b></span></td>
                                             }

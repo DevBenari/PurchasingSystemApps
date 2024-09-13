@@ -22,12 +22,18 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
+                            <a class="btn btn-orange" style="color:#ffffff" asp-action="Index" asp-controller="Role" asp-area="MasterData">
+                                Role
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
                             <button class="btn btn-orange dropdown-toggle" style="color:#ffffff" data-bs-toggle="dropdown" aria-expanded="false">
-                                User
+                                Users
                             </button>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <li><a class="dropdown-item" asp-action="Index" asp-controller="UserActive" asp-area="MasterData">User</a></li>                                
-                                <li><a class="dropdown-item" asp-action="Index" asp-controller="Role" asp-area="MasterData">Role User</a></li>
+                                <li><a class="dropdown-item" asp-action="Index" asp-controller="Position" asp-area="MasterData">Position</a></li>
+                                <li><a class="dropdown-item" asp-action="Index" asp-controller="Department" asp-area="MasterData">Department</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -77,7 +83,7 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="btn btn-orange" style="color:#ffffff" asp-action="Index" asp-controller="DueDate" asp-area="MasterData">
-                                Due Date
+                                Date Expired
                             </a>
                         </li>
                     </ul>

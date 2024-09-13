@@ -24,6 +24,9 @@ namespace PurchasingSystemApps.Areas.MasterData.Controllers
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly IUserActiveRepository _userActiveRepository;
         private readonly IWarehouseLocationRepository _warehouseLocationRepository;
+        private readonly IDepartmentRepository _departmentRepository;
+        private readonly IPositionRepository _positionRepository;
+
 
         private readonly IHostingEnvironment _hostingEnvironment;
 
@@ -33,6 +36,8 @@ namespace PurchasingSystemApps.Areas.MasterData.Controllers
             ApplicationDbContext applicationDbContext,
             IUserActiveRepository userActiveRepository,
             IWarehouseLocationRepository warehouseLocationRepository,
+            IDepartmentRepository departmentRepository, 
+            IPositionRepository positionRepository,
 
             IHostingEnvironment hostingEnvironment
         )
@@ -42,8 +47,16 @@ namespace PurchasingSystemApps.Areas.MasterData.Controllers
             _applicationDbContext = applicationDbContext;
             _userActiveRepository = userActiveRepository;
             _warehouseLocationRepository = warehouseLocationRepository;
+            _departmentRepository = departmentRepository;
+            _positionRepository = positionRepository;
 
             _hostingEnvironment = hostingEnvironment;
+        }
+
+        public JsonResult LoadPosition(Guid Id)
+        {
+            var position = _applicationDbContext.Positions.Where(p => p.DepartmentId == Id).ToList();
+            return Json(new SelectList(position, "PositionId", "PositionName"));
         }
 
         [HttpGet]
@@ -72,6 +85,10 @@ namespace PurchasingSystemApps.Areas.MasterData.Controllers
         public async Task<ViewResult> CreateUserActive()
         {
             ViewBag.Active = "MasterData";
+
+            ViewBag.Department = new SelectList(await _departmentRepository.GetDepartments(), "DepartmentId", "DepartmentName", SortOrder.Ascending);
+            ViewBag.Position = new SelectList(await _positionRepository.GetPositions(), "PositionId", "PositionName", SortOrder.Ascending);
+
             var user = new UserActiveViewModel();
             var dateNow = DateTimeOffset.Now;
             var setDateNow = DateTimeOffset.Now.ToString("yyMMdd");
@@ -101,7 +118,10 @@ namespace PurchasingSystemApps.Areas.MasterData.Controllers
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> CreateUserActive(UserActiveViewModel vm)
-        {            
+        {
+            ViewBag.Department = new SelectList(await _departmentRepository.GetDepartments(), "DepartmentId", "DepartmentName", SortOrder.Ascending);
+            ViewBag.Position = new SelectList(await _positionRepository.GetPositions(), "PositionId", "PositionName", SortOrder.Ascending);
+
             var dateNow = DateTimeOffset.Now;
             var setDateNow = DateTimeOffset.Now.ToString("yyMMdd");
 
@@ -146,6 +166,8 @@ namespace PurchasingSystemApps.Areas.MasterData.Controllers
                     UserActiveCode = vm.UserActiveCode,
                     FullName = vm.FullName,
                     IdentityNumber = vm.IdentityNumber,
+                    DepartmentId = vm.DepartmentId,
+                    PositionId = vm.PositionId,
                     PlaceOfBirth = vm.PlaceOfBirth,
                     DateOfBirth = vm.DateOfBirth,
                     Gender = vm.Gender,
@@ -170,18 +192,24 @@ namespace PurchasingSystemApps.Areas.MasterData.Controllers
                     }
                     else
                     {
+                        ViewBag.Department = new SelectList(await _departmentRepository.GetDepartments(), "DepartmentId", "DepartmentName", SortOrder.Ascending);
+                        ViewBag.Position = new SelectList(await _positionRepository.GetPositions(), "PositionId", "PositionName", SortOrder.Ascending);
                         TempData["WarningMessage"] = "Account " + vm.FullName + " Already Exist !!!";
                         return View(vm);
                     }
                 }
                 else
-                {                    
+                {
+                    ViewBag.Department = new SelectList(await _departmentRepository.GetDepartments(), "DepartmentId", "DepartmentName", SortOrder.Ascending);
+                    ViewBag.Position = new SelectList(await _positionRepository.GetPositions(), "PositionId", "PositionName", SortOrder.Ascending);
                     TempData["WarningMessage"] = "Account " + vm.FullName + " Already Exist !!!";
                     return View(vm);
                 }
 
             }
-            
+
+            ViewBag.Department = new SelectList(await _departmentRepository.GetDepartments(), "DepartmentId", "DepartmentName", SortOrder.Ascending);
+            ViewBag.Position = new SelectList(await _positionRepository.GetPositions(), "PositionId", "PositionName", SortOrder.Ascending);
             return View();
         }
 
@@ -189,6 +217,9 @@ namespace PurchasingSystemApps.Areas.MasterData.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> DetailUserActive(Guid Id)
         {
+            ViewBag.Department = new SelectList(await _departmentRepository.GetDepartments(), "DepartmentId", "DepartmentName", SortOrder.Ascending);
+            ViewBag.Position = new SelectList(await _positionRepository.GetPositions(), "PositionId", "PositionName", SortOrder.Ascending);
+
             ViewBag.Active = "MasterData";
             var user = await _userActiveRepository.GetUserById(Id);
 
@@ -204,6 +235,8 @@ namespace PurchasingSystemApps.Areas.MasterData.Controllers
                 UserActiveCode = user.UserActiveCode,
                 FullName = user.FullName,
                 IdentityNumber = user.IdentityNumber,
+                DepartmentId = user.DepartmentId,
+                PositionId = user.PositionId,
                 PlaceOfBirth = user.PlaceOfBirth,
                 DateOfBirth = user.DateOfBirth,
                 Gender = user.Gender,
@@ -219,6 +252,9 @@ namespace PurchasingSystemApps.Areas.MasterData.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> DetailUserActive(UserActiveViewModel viewModel)
         {
+            ViewBag.Department = new SelectList(await _departmentRepository.GetDepartments(), "DepartmentId", "DepartmentName", SortOrder.Ascending);
+            ViewBag.Position = new SelectList(await _positionRepository.GetPositions(), "PositionId", "PositionName", SortOrder.Ascending);
+
             if (ModelState.IsValid)
             {
                 var user = await _userActiveRepository.GetUserByIdNoTracking(viewModel.UserActiveId);
@@ -235,6 +271,8 @@ namespace PurchasingSystemApps.Areas.MasterData.Controllers
                         user.UserActiveCode = viewModel.UserActiveCode;
                         user.FullName = viewModel.FullName;
                         user.IdentityNumber = viewModel.IdentityNumber;
+                        user.DepartmentId = viewModel.DepartmentId;
+                        user.PositionId = viewModel.PositionId;
                         user.PlaceOfBirth = viewModel.PlaceOfBirth;
                         user.DateOfBirth = viewModel.DateOfBirth;
                         user.Gender = viewModel.Gender;
@@ -266,17 +304,23 @@ namespace PurchasingSystemApps.Areas.MasterData.Controllers
                     }
                     else 
                     {
+                        ViewBag.Department = new SelectList(await _departmentRepository.GetDepartments(), "DepartmentId", "DepartmentName", SortOrder.Ascending);
+                        ViewBag.Position = new SelectList(await _positionRepository.GetPositions(), "PositionId", "PositionName", SortOrder.Ascending);
                         TempData["WarningMessage"] = "Account " + viewModel.FullName + " Sorry, Data Failed !!!";
                         return View(viewModel);
                     }                        
                 }
                 else
-                {                    
+                {
+                    ViewBag.Department = new SelectList(await _departmentRepository.GetDepartments(), "DepartmentId", "DepartmentName", SortOrder.Ascending);
+                    ViewBag.Position = new SelectList(await _positionRepository.GetPositions(), "PositionId", "PositionName", SortOrder.Ascending);
                     TempData["WarningMessage"] = "Account " + viewModel.FullName + " Already Exist !!!";
                     return View(viewModel);
                 }
             }
-            
+
+            ViewBag.Department = new SelectList(await _departmentRepository.GetDepartments(), "DepartmentId", "DepartmentName", SortOrder.Ascending);
+            ViewBag.Position = new SelectList(await _positionRepository.GetPositions(), "PositionId", "PositionName", SortOrder.Ascending);
             return View();
         }
 

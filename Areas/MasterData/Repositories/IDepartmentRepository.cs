@@ -13,7 +13,7 @@ namespace PurchasingSystemApps.Areas.MasterData.Repositories
             _context = context;
         }
 
-        public Department Add(Department Department)
+        public Department Tambah(Department Department)
         {
             _context.Departments.Add(Department);
             _context.SaveChanges();
@@ -41,19 +41,42 @@ namespace PurchasingSystemApps.Areas.MasterData.Repositories
 
         public IEnumerable<Department> GetAllDepartment()
         {
-            return _context.Departments
+            return _context.Departments.OrderByDescending(m => m.CreateDateTime)
                 .Include(p => p.Positions)
                 .AsNoTracking();
         }
 
         public async Task<List<Department>> GetDepartments()
         {
-            return await _context.Departments.OrderBy(p => p.DepartmentName).Select(x => new Department()
+            return await _context.Departments.OrderBy(p => p.DepartmentName).Select(Department => new Department()
             {
-                DepartmentId = x.DepartmentId,
-                DepartmentCode = x.DepartmentCode,
-                DepartmentName = x.DepartmentName
+                DepartmentId = Department.DepartmentId,
+                DepartmentCode = Department.DepartmentCode,
+                DepartmentName = Department.DepartmentName
             }).ToListAsync();
+        }
+
+        public async Task<Department> GetDepartmentById(Guid Id)
+        {
+            var Department = await _context.Departments
+                .SingleOrDefaultAsync(i => i.DepartmentId == Id);
+
+            if (Department != null)
+            {
+                var DepartmentDetail = new Department()
+                {
+                    DepartmentId = Department.DepartmentId,
+                    DepartmentCode = Department.DepartmentCode,
+                    DepartmentName = Department.DepartmentName,                    
+                };
+                return DepartmentDetail;
+            }
+            return null;
+        }
+
+        public async Task<Department> GetDepartmentByIdNoTracking(Guid Id)
+        {
+            return await _context.Departments.AsNoTracking().FirstOrDefaultAsync(a => a.DepartmentId == Id);
         }
     }
 }

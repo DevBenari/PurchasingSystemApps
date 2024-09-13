@@ -255,6 +255,52 @@ namespace PurchasingSystemApps.Migrations
                     b.ToTable("MstCategory", "dbo");
                 });
 
+            modelBuilder.Entity("PurchasingSystemApps.Areas.MasterData.Models.Department", b =>
+                {
+                    b.Property<Guid>("DepartmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreateBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DeleteBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeleteDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DepartmentCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DepartmentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsCancel")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UpdateBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("DepartmentId");
+
+                    b.ToTable("MstDepartment", "dbo");
+                });
+
             modelBuilder.Entity("PurchasingSystemApps.Areas.MasterData.Models.Discount", b =>
                 {
                     b.Property<Guid>("DiscountId")
@@ -495,6 +541,54 @@ namespace PurchasingSystemApps.Migrations
                     b.HasKey("MeasurementId");
 
                     b.ToTable("MstMeasurement", "dbo");
+                });
+
+            modelBuilder.Entity("PurchasingSystemApps.Areas.MasterData.Models.Position", b =>
+                {
+                    b.Property<Guid>("PositionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreateBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DeleteBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeleteDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsCancel")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PositionCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PositionName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UpdateBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("PositionId");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("MstPosition", "dbo");
                 });
 
             modelBuilder.Entity("PurchasingSystemApps.Areas.MasterData.Models.Principal", b =>
@@ -775,6 +869,9 @@ namespace PurchasingSystemApps.Migrations
                     b.Property<DateTime>("DeleteDateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -808,6 +905,9 @@ namespace PurchasingSystemApps.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("PositionId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("UpdateBy")
                         .HasColumnType("uniqueidentifier");
 
@@ -819,6 +919,10 @@ namespace PurchasingSystemApps.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserActiveId");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("PositionId");
 
                     b.ToTable("MstUserActive", "dbo");
                 });
@@ -2278,6 +2382,16 @@ namespace PurchasingSystemApps.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("PurchasingSystemApps.Areas.MasterData.Models.Position", b =>
+                {
+                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.Department", "Department")
+                        .WithMany("Positions")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Department");
+                });
+
             modelBuilder.Entity("PurchasingSystemApps.Areas.MasterData.Models.Product", b =>
                 {
                     b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.Category", "Category")
@@ -2324,6 +2438,23 @@ namespace PurchasingSystemApps.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("UnitManager");
+                });
+
+            modelBuilder.Entity("PurchasingSystemApps.Areas.MasterData.Models.UserActive", b =>
+                {
+                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("PurchasingSystemApps.Areas.MasterData.Models.Position", "Position")
+                        .WithMany()
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Department");
+
+                    b.Navigation("Position");
                 });
 
             modelBuilder.Entity("PurchasingSystemApps.Areas.MasterData.Models.WarehouseLocation", b =>
@@ -2819,6 +2950,11 @@ namespace PurchasingSystemApps.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("WarehouseTransfer");
+                });
+
+            modelBuilder.Entity("PurchasingSystemApps.Areas.MasterData.Models.Department", b =>
+                {
+                    b.Navigation("Positions");
                 });
 
             modelBuilder.Entity("PurchasingSystemApps.Areas.Order.Models.PurchaseOrder", b =>

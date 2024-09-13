@@ -13,7 +13,7 @@ namespace PurchasingSystemApps.Areas.MasterData.Repositories
             _context = context;
         }
 
-        public Position Add(Position Position)
+        public Position Tambah(Position Position)
         {
             _context.Positions.Add(Position);
             _context.SaveChanges();
@@ -41,7 +41,8 @@ namespace PurchasingSystemApps.Areas.MasterData.Repositories
 
         public IEnumerable<Position> GetAllPosition()
         {
-            return _context.Positions
+            return _context.Positions.OrderByDescending(m => m.CreateDateTime)
+                .Include(d => d.Department)
                 .AsNoTracking();
         }
 
@@ -51,8 +52,34 @@ namespace PurchasingSystemApps.Areas.MasterData.Repositories
             {
                 PositionId = x.PositionId,
                 PositionCode = x.PositionCode,
-                PositionName = x.PositionName
+                PositionName = x.PositionName,
+                DepartmentId = x.DepartmentId,
             }).ToListAsync();
+        }
+
+        public async Task<Position> GetPositionById(Guid Id)
+        {
+            var Position = await _context.Positions
+                .Include (d => d.Department)
+                .SingleOrDefaultAsync(i => i.PositionId == Id);
+
+            if (Position != null)
+            {
+                var PositionDetail = new Position()
+                {
+                    PositionId = Position.PositionId,
+                    PositionCode = Position.PositionCode,
+                    PositionName = Position.PositionName,
+                    DepartmentId = Position.DepartmentId,
+                };
+                return PositionDetail;
+            }
+            return null;
+        }
+
+        public async Task<Position> GetPositionByIdNoTracking(Guid Id)
+        {
+            return await _context.Positions.AsNoTracking().FirstOrDefaultAsync(a => a.PositionId == Id);
         }
     }
 }

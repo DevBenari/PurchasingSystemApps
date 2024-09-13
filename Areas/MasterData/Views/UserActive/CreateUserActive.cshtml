@@ -45,6 +45,24 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label asp-for="DepartmentId" class="col-sm-3 col-form-label">Department Name</label>
+                        <div class="col-sm-9">
+                            <select id="DepartmentList" class="form-control select2bs4" style="width: 100%;" asp-for="DepartmentId" asp-items="@ViewBag.Department">
+                                <option value="" hidden disabled selected>--Choose Department--</option>
+                            </select>
+                            <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="PositionId" class="col-sm-3 col-form-label">Position Name</label>
+                        <div class="col-sm-9">
+                            <select id="PositionList" class="form-control select2bs4" style="width: 100%;" asp-for="PositionId" asp-items="@ViewBag.Position">
+                                <option value="" hidden disabled selected>--Choose Position--</option>
+                            </select>
+                            <span asp-validation-for="PositionId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-3 col-form-label" asp-for="PlaceOfBirth">Place Of Birth</label>
                         <div class="col-sm-9">
                             <input maxlength="100" autocomplete="off" type="text" asp-for="PlaceOfBirth" class="form-control form-control-border border-width-2" id="" placeholder="Place Of Birth">
@@ -142,6 +160,32 @@
                             $('#tanggallahir').datetimepicker({
                                 format: 'DD/MM/yyyy'
                             })
+                        })
+                    </script>
+
+                    <script>
+                        $(document).ready(function () {                            
+                            $("#PositionList").empty().append('<option value = "' + -1 + '">' + "--Choose Position--" + '</option>');
+
+                            $("#DepartmentList").change(function () {
+                                $("#PositionList").empty();
+                                $.ajax({
+                                    type: 'GET',
+                                    url: '@Url.Action("LoadPosition")',
+                                    dataType: 'json',
+                                    data: { id: $("#DepartmentList").val() },
+                                    success: function (positions) {
+                                        $("#PositionList").append('<option value = "' + -1 + '">' + "--Choose Position--" + '</option>');
+                                        $.each(positions, function (i, position) {
+                                            $("#PositionList").append('<option value = "' + position.value + '">' + position.text + '</option>');
+                                        });
+                                    },
+                                    error: function (ex) {
+                                        alert('Failed get data Position !!!' + ex);
+                                    }
+                                });
+                                return false;
+                            })                            
                         })
                     </script>
                 }

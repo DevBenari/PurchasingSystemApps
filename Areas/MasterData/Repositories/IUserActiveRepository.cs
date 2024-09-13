@@ -25,6 +25,8 @@ namespace PurchasingSystemApps.Areas.MasterData.Repositories
         public async Task<UserActive> GetUserById(Guid Id)
         {
             var user = await _context.UserActives
+                .Include(p => p.Department)
+                .Include(c => c.Position)
                 .SingleOrDefaultAsync(i => i.UserActiveId == Id);
 
             if (user != null)
@@ -35,6 +37,8 @@ namespace PurchasingSystemApps.Areas.MasterData.Repositories
                     UserActiveCode = user.UserActiveCode,
                     FullName = user.FullName,
                     IdentityNumber = user.IdentityNumber,
+                    DepartmentId = user.DepartmentId,
+                    PositionId = user.PositionId,
                     PlaceOfBirth = user.PlaceOfBirth,
                     DateOfBirth = user.DateOfBirth,
                     Gender = user.Gender,
@@ -61,6 +65,8 @@ namespace PurchasingSystemApps.Areas.MasterData.Repositories
                 UserActiveCode = user.UserActiveCode,
                 FullName = user.FullName,
                 IdentityNumber = user.IdentityNumber,
+                DepartmentId = user.DepartmentId,
+                PositionId = user.PositionId,
                 PlaceOfBirth = user.PlaceOfBirth,
                 DateOfBirth = user.DateOfBirth,
                 Gender = user.Gender,
@@ -74,6 +80,8 @@ namespace PurchasingSystemApps.Areas.MasterData.Repositories
         public IEnumerable<UserActive> GetAllUser()
         {
             return _context.UserActives.OrderByDescending(d => d.CreateDateTime)
+                .Include(p => p.Department)
+                .Include(c => c.Position)
                 .AsNoTracking();
         }
 

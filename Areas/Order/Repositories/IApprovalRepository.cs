@@ -50,7 +50,10 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
                     UserApproveId = Approval.UserApproveId,
                     ApproveBy = Approval.ApproveBy,
                     ApproveTime = Approval.ApproveTime,
-                    ApproveDate = Approval.ApproveDate,                                        
+                    ApproveDate = Approval.ApproveDate,
+                    ApproveStatusUser1 = Approval.ApproveStatusUser1,
+                    ApproveStatusUser2 = Approval.ApproveStatusUser2,
+                    ApproveStatusUser3 = Approval.ApproveStatusUser3,
                     Status = Approval.Status,
                     Note = Approval.Note
                 };
@@ -79,6 +82,9 @@ namespace PurchasingSystemApps.Areas.Order.Repositories
                 ApproveBy = Approval.ApproveBy,
                 ApproveTime = Approval.ApproveTime,
                 ApproveDate = Approval.ApproveDate,
+                ApproveStatusUser1 = Approval.ApproveStatusUser1,
+                ApproveStatusUser2 = Approval.ApproveStatusUser2,
+                ApproveStatusUser3 = Approval.ApproveStatusUser3,
                 Status = Approval.Status,
                 Note = Approval.Note
             }).ToListAsync();

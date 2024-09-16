@@ -12,7 +12,10 @@ namespace PurchasingSystemApps.Areas.Order.ViewModels
         public Guid? UserApproveId { get; set; }
         public string ApproveBy { get; set; }
         public string? ApproveTime { get; set; }
-        public DateTime ApproveDate { get; set; }        
+        public DateTime ApproveDate { get; set; }
+        public string? ApproveStatusUser1 { get; set; }
+        public string? ApproveStatusUser2 { get; set; }
+        public string? ApproveStatusUser3 { get; set; }
         public string Status { get; set; }
         public string? Note { get; set; }
         public int QtyTotal { get; set; }

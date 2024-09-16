@@ -294,6 +294,9 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
                         ApproveBy = "",
                         ApproveTime = "",
                         ApproveDate = DateTime.MinValue,
+                        ApproveStatusUser1 = "",
+                        ApproveStatusUser2 = "",
+                        ApproveStatusUser3 = "",
                         Status = purchaseRequest.Status,
                         Note = purchaseRequest.Note,
                     };
@@ -314,6 +317,9 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
                         ApproveBy = "",
                         ApproveTime = "",
                         ApproveDate = DateTime.MinValue,
+                        ApproveStatusUser1 = "",
+                        ApproveStatusUser2 = "",
+                        ApproveStatusUser3 = "",
                         Status = purchaseRequest.Status,
                         Note = purchaseRequest.Note,
                     };
@@ -334,6 +340,9 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
                         ApproveBy = "",
                         ApproveTime = "",
                         ApproveDate = DateTime.MinValue,
+                        ApproveStatusUser1 = "",
+                        ApproveStatusUser2 = "",
+                        ApproveStatusUser3 = "",
                         Status = purchaseRequest.Status,
                         Note = purchaseRequest.Note,
                     };

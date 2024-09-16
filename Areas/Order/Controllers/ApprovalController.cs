@@ -134,7 +134,10 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
                 UserApproveId = Approval.UserApproveId,
                 ApproveTime = "",
                 ApproveBy = getUser.NamaUser,
-                ApproveDate = DateTime.Now,                
+                ApproveDate = DateTime.Now,
+                ApproveStatusUser1 = Approval.ApproveStatusUser1,
+                ApproveStatusUser2 = Approval.ApproveStatusUser2,
+                ApproveStatusUser3 = Approval.ApproveStatusUser3,
                 Status = Approval.Status,
                 Note = Approval.Note
             };
@@ -189,6 +192,19 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
 
             if (ModelState.IsValid)
             {
+                //if (getUser1.Status != "Approve")
+                //{
+
+                //}
+                //else if (getUser2.Status != "Approve")
+                //{
+
+                //}
+                //else if (getUser3.Status != "Approve")
+                //{
+
+                //}
+
                 Approval approval = await _approvalRepository.GetApprovalByIdNoTracking(viewModel.ApprovalId);
 
                 approval.Status = viewModel.Status;
@@ -202,7 +218,18 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
                     //approval.ApproveBy = viewModel.ApproveBy;
                 }
 
-                var checkApprove = _approvalRepository.GetAllApproval().Where(a => a.PurchaseRequestNumber == viewModel.PurchaseRequestNumber && a.UserApproveId.ToString() == viewModel.UserAccessId).ToList();                
+                var getPrNumber = _purchaseRequestRepository.GetAllPurchaseRequest().Where(pr => pr.PurchaseRequestNumber == viewModel.PurchaseRequestNumber).FirstOrDefault();
+                var getUserApprove = _approvalRepository.GetAllApproval().Where(pr => pr.PurchaseRequestNumber == getPrNumber.PurchaseRequestNumber).ToList();
+                var getUser1 = getUserApprove.Where(u => u.UserApproveId == getPrNumber.UserApprove1Id).FirstOrDefault();
+                var getUser2 = getUserApprove.Where(u => u.UserApproveId == getPrNumber.UserApprove2Id).FirstOrDefault();
+                var getUser3 = getUserApprove.Where(u => u.UserApproveId == getPrNumber.UserApprove3Id).FirstOrDefault();
+
+                if (getUser1 != null)
+                {
+                    getUser1.Status = viewModel.Status;
+
+                    _applicationDbContext.Entry(getUser1).State = EntityState.Modified;
+                }
 
                 var result = _purchaseRequestRepository.GetAllPurchaseRequest().Where(c => c.PurchaseRequestNumber == viewModel.PurchaseRequestNumber).FirstOrDefault();
                 if (result != null)

@@ -71,7 +71,9 @@
                                         <th>No</th>
                                         <th>Create Date</th>
                                         <th>Request By</th>
-                                        <th>Approve By</th>
+                                        <th>Approve By 1</th>
+                                        <th>Approve By 2</th>
+                                        <th>Approve By 3</th>
                                         <th>PR Number</th>
                                         <th>Status</th>
                                         @*<th>Grand Total</th>*@
@@ -98,6 +100,8 @@
                                                 <td>@pr.CreateDateTime.ToString("dd MMMM yyyy")</td>
                                                 <td>@pr.ApplicationUser.NamaUser</td>
                                                 <td>@pr.UserApprove1.FullName</td>
+                                                <td>@pr.UserApprove2.FullName</td>
+                                                <td>@pr.UserApprove3.FullName</td>
                                                 <td>@pr.PurchaseRequestNumber</td>
                                                 <td><span class="badge bg-danger"><b>@pr.Status</b></span></td>
                                             </tr>
@@ -120,6 +124,8 @@
                                                 <td>@pr.CreateDateTime.ToString("dd MMMM yyyy")</td>
                                                 <td>@pr.ApplicationUser.NamaUser</td>
                                                 <td>@pr.UserApprove1.FullName</td>
+                                                <td>@pr.UserApprove2.FullName</td>
+                                                <td>@pr.UserApprove3.FullName</td>
                                                 <td>@pr.PurchaseRequestNumber</td>
                                                 <td><span class="badge bg-success"><b>@pr.Status</b></span></td>
                                             </tr>
@@ -131,6 +137,8 @@
                                                 <td>@pr.CreateDateTime.ToString("dd MMMM yyyy")</td>
                                                 <td>@pr.ApplicationUser.NamaUser</td>
                                                 <td>@pr.UserApprove1.FullName</td>
+                                                <td>@pr.UserApprove2.FullName</td>
+                                                <td>@pr.UserApprove3.FullName</td>
                                                 <td>@pr.PurchaseRequestNumber</td>
                                                 <td><b>@pr.Status</b></td>
                                             </tr>

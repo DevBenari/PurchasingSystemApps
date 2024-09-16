@@ -140,6 +140,21 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
             };
 
             var getPrNumber = _purchaseRequestRepository.GetAllPurchaseRequest().Where(pr => pr.PurchaseRequestNumber == viewModel.PurchaseRequestNumber).FirstOrDefault();
+            var getUserApprove = _approvalRepository.GetAllApproval().Where(pr => pr.PurchaseRequestNumber == getPrNumber.PurchaseRequestNumber).ToList();
+            var getUser1 = getUserApprove.Where(u => u.UserApproveId == getPrNumber.UserApprove1Id).FirstOrDefault();
+            var getUser2 = getUserApprove.Where(u => u.UserApproveId == getPrNumber.UserApprove2Id).FirstOrDefault();
+            var getUser3 = getUserApprove.Where(u => u.UserApproveId == getPrNumber.UserApprove3Id).FirstOrDefault();
+            
+            if (getUser1.Status != "Approve")
+            {
+
+            } else if (getUser2.Status != "Approve")
+            {
+
+            } else if (getUser3.Status != "Approve")
+            {
+
+            }
 
             viewModel.QtyTotal = getPrNumber.QtyTotal;
             viewModel.GrandTotal = Math.Truncate(getPrNumber.GrandTotal);
@@ -179,7 +194,7 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
                 approval.Status = viewModel.Status;
                 approval.Note = viewModel.Note;
 
-                if (approval.Status == "Approved" || approval.Status == "Rejected")
+                if (approval.Status == "Approve" || approval.Status == "Reject")
                 {
                     //Belum di sesuaikan
 
@@ -187,7 +202,7 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
                     //approval.ApproveBy = viewModel.ApproveBy;
                 }
 
-                var checkApprove = _approvalRepository.GetAllApproval().Where(a => a.PurchaseRequestNumber == viewModel.PurchaseRequestNumber).ToList();                
+                var checkApprove = _approvalRepository.GetAllApproval().Where(a => a.PurchaseRequestNumber == viewModel.PurchaseRequestNumber && a.UserApproveId.ToString() == viewModel.UserAccessId).ToList();                
 
                 var result = _purchaseRequestRepository.GetAllPurchaseRequest().Where(c => c.PurchaseRequestNumber == viewModel.PurchaseRequestNumber).FirstOrDefault();
                 if (result != null)
@@ -215,6 +230,59 @@ namespace PurchasingSystemApps.Areas.Order.Controllers
             }
 
             return View();
-        }        
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> RejectApproval(ApprovalViewModel viewModel)
+        {
+            ViewBag.Active = "Order";
+
+            viewModel.Status = "Reject";
+
+            if (ModelState.IsValid)
+            {
+                Approval approval = await _approvalRepository.GetApprovalByIdNoTracking(viewModel.ApprovalId);
+
+                approval.Status = viewModel.Status;
+                approval.Note = viewModel.Note;
+
+                if (approval.Status == "Approve" || approval.Status == "Reject")
+                {
+                    //Belum di sesuaikan
+
+                    //approval.ApproveDate = DateTime.Now;
+                    //approval.ApproveBy = viewModel.ApproveBy;
+                }
+
+                var checkApprove = _approvalRepository.GetAllApproval().Where(a => a.PurchaseRequestNumber == viewModel.PurchaseRequestNumber && a.UserApproveId.ToString() == viewModel.UserAccessId).ToList();
+
+                var result = _purchaseRequestRepository.GetAllPurchaseRequest().Where(c => c.PurchaseRequestNumber == viewModel.PurchaseRequestNumber).FirstOrDefault();
+                if (result != null)
+                {
+                    result.Status = viewModel.Status;
+                    result.Note = viewModel.Note;
+
+                    _applicationDbContext.Entry(result).State = EntityState.Modified;
+                }
+                _approvalRepository.Update(approval);
+
+                if (approval.Status == "Waiting Approval")
+                {
+                    TempData["SuccessMessage"] = "Number " + viewModel.PurchaseRequestNumber + " Waiting Approval";
+                }
+                else if (approval.Status == "Approved")
+                {
+                    TempData["SuccessMessage"] = "Number " + viewModel.PurchaseRequestNumber + " Approved";
+                }
+                else if (approval.Status == "Rejected")
+                {
+                    TempData["SuccessMessage"] = "Number " + viewModel.PurchaseRequestNumber + " Rejected";
+                }
+                return RedirectToAction("Index", "PurchaseOrder");
+            }
+
+            return View();
+        }
     }
 }

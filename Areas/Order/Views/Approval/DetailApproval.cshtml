@@ -34,6 +34,7 @@
                     <input type="hidden" asp-for="ApproveBy" />
                     <input type="hidden" asp-for="QtyTotal" />
                     <input type="hidden" asp-for="GrandTotal" />
+                    <input type="hidden" asp-for="Status" id="Status" value=""/>
 
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" asp-for="PurchaseRequestNumber">PR Number</label>
@@ -43,7 +44,7 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" asp-for="UserAccessId">
-                            Dibuat Oleh
+                            Create By
                         </label>
                         <div class="col-sm-10">
                             <select asp-for="UserAccessId" asp-items="@ViewBag.User" class="form-control select2bs4" id="UserAccessId" style="width: 100%;" disabled>
@@ -51,45 +52,23 @@
                             </select>
                             <span asp-validation-for="UserAccessId" class="error"></span>
                         </div>
-                    </div>                    
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" asp-for="UserApproveId">
-                            User Approve 1
-                        </label>
-                        <div class="col-sm-10">
-                            <select asp-for="UserApproveId" asp-items="@ViewBag.Approval" class="form-control select2bs4" id="UserApproveId" style="width: 100%;" disabled>
-                                <option value="" hidden disabled selected>--Choose User--</option>
-                            </select>
-                            <span asp-validation-for="UserApproveId" class="error"></span>
-                        </div>
-                    </div>                    
-                    @if (Model.Status == "Approved" || Model.Status == "Rejected")
+                    </div>
+
+                    @*Perbedaan nya adalah ketika sudah disetujui/ditolak form input Status dan Keterangan di nonaktifkan*@
+                    @* @if (Model.Status == "Approved" || Model.Status == "Rejected")
                     {
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" asp-for="Status">Status</label>
-                            <div class="col-sm-10">
-                                @*Perbedaan nya adalah ketika sudah disetujui/ditolak form input Status dan Keterangan di nonaktifkan*@
+                            <div class="col-sm-10">                                
                                 <select class="form-control select2bs4" style="width: 100%;" asp-for="Status" disabled>
                                     <option value="" hidden disabled selected>--Choose Status--</option>
                                     <option>Approved</option>
-                                    <option>Not Approved</option>
+                                    <option>Waiting Approval</option>
                                     <option>Rejected</option>
                                 </select>
                                 <span asp-validation-for="Status" class="text-danger"></span>
                             </div>
-                        </div>
-                        @*<div class="form-group row">
-                            <label class="col-sm-2 col-form-label" asp-for="ApproveDate">Approve Date</label>
-                            <div class="col-sm-10">
-                                <input type="text" asp-for="ApproveDate" class="form-control form-control-border border-width-2" id="approvedate" placeholder="Approve Date" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" asp-for="ApproveBy">Approved/Rejected By</label>
-                            <div class="col-sm-10">
-                                <input type="text" asp-for="ApproveBy" class="form-control form-control-border border-width-2" id="approveby" placeholder="Approve By" readonly disabled>
-                            </div>
-                        </div>*@
+                        </div>                        
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" asp-for="Note">Note</label>
                             <div class="col-sm-10">
@@ -98,7 +77,7 @@
                             </div>
                         </div>
                     }
-                    else if (Model.Status == "Not Approved")
+                    else if (Model.Status == "Waiting Approval")
                     {
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" asp-for="Status">Action
@@ -111,7 +90,7 @@
                                 <select class="form-control select2bs4" style="width: 100%;" asp-for="Status">
                                     <option value="" hidden disabled selected>--Choose Status--</option>
                                     <option>Approved</option>
-                                    <option>Not Approved</option>
+                                    <option>Waiting Approval</option>
                                     <option>Rejected</option>
                                 </select>
                                 <span asp-validation-for="Status" class="text-danger"></span>
@@ -124,7 +103,7 @@
                                 <span asp-validation-for="Note" class="text-danger"></span>
                             </div>
                         </div>
-                    }
+                    } *@
 
 
                     <div class="card card-default">
@@ -181,12 +160,13 @@
                     <!-- start button footer -->
                     <div class="card card-orange">
                         <div class="card-body">
-                            @if (Model.Status == "Not Approved")
+                            @if (Model.Status == "Waiting Approval")
                             {
-                                <button type="submit" class="btn btn-primary bg-indigo float-left fw-bold" id="btnsimpan"><div style="color:#ffffff">Save</div></button>
+                                <button type="submit" class="btn btn-primary bg-indigo float-left fw-bold" id="btnapprove" value="Approve"><div style="color:#ffffff">Approve</div></button>
+                                <button type="submit" class="btn btn-primary bg-danger float-left fw-bold" id="btnreject" value="Reject"><div style="color:#ffffff">Reject</div></button>
                                 <a class="btn btn-default" asp-action="Index" asp-controller="Approval" asp-area="Order" id="btnbatal">Cancel</a>
                             }
-                            else if (Model.Status == "Approved" || Model.Status == "Rejected")
+                            else if (Model.Status == "Approve" || Model.Status == "Reject")
                             {
                                 <a class="btn btn-default" asp-action="Index" asp-controller="Approval" asp-area="Order" id="btnbatal">Cancel</a>
                             }
@@ -216,6 +196,20 @@
                 theme: 'bootstrap4'
             })
         })
-        $('#toolAction').tooltip({ animation: true });
+       // $('#toolAction').tooltip({ animation: true });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            jQuery('button[type=submit]').click(function (event) {
+                if (this.value == "Approve") {
+                    $('#Status').val("Approve");                    
+                }
+                if (this.value == "Reject") {
+                    $('#Status').val("Reject");
+                    
+                }               
+            });            
+        });
     </script>
 }

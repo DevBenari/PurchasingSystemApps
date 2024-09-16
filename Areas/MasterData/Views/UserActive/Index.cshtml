@@ -75,6 +75,8 @@
                                         <th>Create Date</th>
                                         <th>User Code</th>
                                         <th>Fullname</th>
+                                        <th>Department</th>
+                                        <th>Position</th>
                                         <th>Date Of Birth</th>
                                         <th>Address</th>
                                     </tr>
@@ -90,6 +92,8 @@
                                             <td>@user.CreateDateTime.ToString("dd MMMM yyyy")</td>
                                             <td>@user.UserActiveCode</td>
                                             <td>@user.FullName</td>
+                                            <td>@user.Department.DepartmentName</td>
+                                            <td>@user.Position.PositionName</td>
                                             <td>@user.DateOfBirth.ToString("dd MMMM yyyy")</td>
                                             <td>@user.Address</td>
                                         </tr>

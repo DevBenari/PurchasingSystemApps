@@ -71,23 +71,17 @@
                                 <tbody>
                                     @foreach (var pr in Model)
                                     {
-                                        <tr data-href="@Url.Action("DetailApproval", "Approval", new {id=pr.ApprovalId})">
+                                        var rowColor = pr.Status == "Not Approved" ? "#E84855" : pr.Status == "Approved" ? "yellow" : "";
+                                        var statusColor = pr.Status == "Not Approved" ? "red" : pr.Status == "Approved" ? "forestgreen" : "black";
+
+                                        <tr style="background-color:@rowColor" data-href="@Url.Action("DetailApproval", "Approval", new { id = pr.ApprovalId })">
                                             <th></th>
                                             <td>@pr.CreateDateTime.ToString("dd MMMM yyyy")</td>
                                             <td>@pr.ApplicationUser.NamaUser</td>
                                             <td>@pr.PurchaseRequestNumber</td>
-                                            <td>@pr.UserApprove1.FullName</td>
-                                            @*<td>@pr.ApproveByUser1</td>
-                                            <td>@pr.User1ApproveTime</td>
-                                            <td>@pr.User1ApproveDate</td>*@
-                                            @if (pr.Status == "Not Approved")
-                                            {
-                                                <td><span class="badge bg-danger"><b>@pr.Status</b></span></td>
-                                            }
-                                            else if (pr.Status == "Approved")
-                                            {
-                                                <td><span class="badge bg-success"><b>@pr.Status</b></span></td>
-                                            }
+                                            <td>@pr.UserApproval.FullName</td>
+                                            <td>@pr.ApproveBy</td>
+                                            <td><div style="color:@statusColor"><b>@pr.Status</b></div></td>
                                         </tr>
                                     }
                                 </tbody>

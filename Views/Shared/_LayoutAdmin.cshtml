@@ -77,6 +77,28 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
+                <li class="nav-item dropdown" style="background-color:red;">
+                    <a class="nav-link" data-bs-toggle="dropdown" href="#"> <i class="bi bi-chat-text"></i> <span class="navbar-badge badge text-bg-danger">3</span> </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-start">
+                        <a href="#" class="dropdown-item">
+                            <!--begin::Message-->
+                            <div class="d-flex">
+                                <div class="flex-shrink-0"> <img src="../../dist/assets/img/user1-128x128.jpg" alt="Avatar" class="img-size-50 rounded-circle me-3"> </div>
+                                <div class="flex-grow-1">
+                                    <h3 class="dropdown-item-title">
+                                        Brad Diesel
+                                        <span class="float-end fs-7 text-danger"><i class="bi bi-star-fill"></i></span>
+                                    </h3>
+                                    <p class="fs-7">Call me whenever you can...</p>
+                                    <p class="fs-7 text-secondary">
+                                        <i class="bi bi-clock-fill me-1"></i> 4 Hours Ago
+                                    </p>
+                                </div>
+                            </div> <!--end::Message-->
+                        </a>
+                        <div class="dropdown-divider"></div> <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                    </div>
+                </li>
                 @if (signInManager.IsSignedIn(User))
                 {
                     <li class="nav-item dropdown">
@@ -329,6 +351,112 @@
     <script src="~/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/admin/dist/js/adminlte.js"></script>
+    <script>
+        // Hubungkan ke SignalR
+        var connection = new signalR.HubConnectionBuilder().withUrl("/chathub").build();
+
+        // Event saat koneksi mulai
+        connection.start().then(function () {
+            console.log("SignalR connected.");
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        // Fungsi untuk memperbarui tampilan jumlah karyawan
+        function updateData(totalKaryawan) {
+            var notificationElement = document.getElementById("dataCountNotification");
+
+            if (notificationElement) {
+                if (!totalKaryawan || isNaN(totalKaryawan)) {
+                    notificationElement.textContent = `0`;
+                } else {
+                    notificationElement.textContent = `${totalKaryawan}`;
+                }
+            }
+        }
+
+        // Menerima notifikasi dari SignalR dan memperbarui data
+        connection.on("UpdateDataCount", function (totalKaryawan) {
+            console.log("Total karyawan diterima dari server ini: ", totalKaryawan);
+            updateData(totalKaryawan);
+
+            // Simpan total karyawan ke Local Storage
+            localStorage.setItem('totalKaryawan', totalKaryawan);
+        });
+
+
+        //LONGER
+
+        // Fungsi untuk memperbarui tampilan jumlah karyawan
+        // function updateDataLog(loggerData) {
+        //     var notificationElement = document.getElementById("loggerContainer");
+
+        //     if (notificationElement) {
+        //         Kosongkan kontainer sebelumnya
+        //         notificationElement.innerHTML = "";
+
+        //         Jika loggerData masih berbentuk string, parse menjadi array
+        //         if (typeof loggerData === "string") {
+        //             Pisahkan string berdasarkan pola tertentu (misal: "Number" dan "Name")
+        //             var entries = loggerData.split(",User:").map(function (entry) {
+        //                 var parts = entry.split(", Pesan: ");
+        //                 return {
+        //                     FS_USERNAME: parts[0].replace("Pesan: ", "").trim(),
+        //                     FS_PESAN: parts[1] ? parts[1].trim() : ""
+        //                 };
+        //             });
+
+        //             loggerData = entries; Setelah di-parse, ganti loggerData menjadi array
+        //         }
+
+        //         Pastikan loggerData sekarang berbentuk array
+        //         if (Array.isArray(loggerData)) {
+
+        //             Iterasi setiap elemen dan tambahkan HTML sesuai format yang diinginkan
+        //             loggerData.forEach(function (empl) {
+        //                 var item = `
+        //                                     <a href="#" class="dropdown-item dropdown-item-unread">
+        //                                         <div class="dropdown-item-avatar">
+        //                                             <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle">
+        //                                             <div class="is-online"></div>
+        //                                         </div>
+        //                                         <div class="dropdown-item-desc">
+        //                                             <b>${empl.FS_USERNAME}</b>
+        //                                             <p>${empl.FS_PESAN}</p>
+        //                                             <div class="time">10 Hours Ago</div>
+        //                                         </div>
+        //                                     </a>
+        //                                 `;
+        //                 Tambahkan elemen baru ke loggerContainer
+        //                 notificationElement.innerHTML += item;
+        //             });
+        //         }
+        //     }
+        // }
+
+        // Menerima notifikasi dari SignalR dan memperbarui data
+        // connection.on("UpdateDataLogger", function (loggerData) {
+        //     console.log("Total karyawan diterima dari server ini: ", loggerData);
+        //     updateDataLog(loggerData);
+
+        //     Simpan total karyawan ke Local Storage
+        //     localStorage.setItem('loggerData', loggerData);
+        // });
+
+        // Saat halaman dimuat, periksa Local Storage
+        window.onload = function () {
+            var storedTotalKaryawan = localStorage.getItem('totalKaryawan');
+            console.log("Total karyawan diterima dari Local Storage  ", storedTotalKaryawan);
+            if (storedTotalKaryawan) {
+                updateData(storedTotalKaryawan);
+            }
+            // var storedLoggerData = localStorage.getItem('loggerData');
+            // console.log("Total karyawan diterima dari Local Storage  ", storedLoggerData);
+            // if (storedLoggerData) {
+            //     updateDataLog(storedLoggerData);
+            // }
+        };
+    </script>
 
     @*UI Normal*@
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>

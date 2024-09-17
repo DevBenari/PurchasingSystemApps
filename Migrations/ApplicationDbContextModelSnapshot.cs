@@ -497,6 +497,62 @@ namespace PurchasingSystemApps.Migrations
                     b.ToTable("MstLeadTime", "dbo");
                 });
 
+            modelBuilder.Entity("PurchasingSystemApps.Areas.MasterData.Models.LogUserActivity", b =>
+                {
+                    b.Property<Guid>("LogActiveId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("CreateBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DeleteBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeleteDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IpAddres")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsCancel")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LogLevel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Timestamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UpdateBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdateDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("LogActiveId");
+
+                    b.ToTable("LogUserActivity", "dbo");
+                });
+
             modelBuilder.Entity("PurchasingSystemApps.Areas.MasterData.Models.Measurement", b =>
                 {
                     b.Property<Guid>("MeasurementId")

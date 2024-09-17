@@ -26,6 +26,7 @@ namespace PurchasingSystemApps.Areas.MasterData.Controllers
         private readonly IWarehouseLocationRepository _warehouseLocationRepository;
         private readonly IDepartmentRepository _departmentRepository;
         private readonly IPositionRepository _positionRepository;
+        private readonly ILogUserActivityRepository _logUserActivityRepository;
 
 
         private readonly IHostingEnvironment _hostingEnvironment;
@@ -38,6 +39,7 @@ namespace PurchasingSystemApps.Areas.MasterData.Controllers
             IWarehouseLocationRepository warehouseLocationRepository,
             IDepartmentRepository departmentRepository, 
             IPositionRepository positionRepository,
+            ILogUserActivityRepository logUserActivityRepository,
 
             IHostingEnvironment hostingEnvironment
         )
@@ -49,6 +51,7 @@ namespace PurchasingSystemApps.Areas.MasterData.Controllers
             _warehouseLocationRepository = warehouseLocationRepository;
             _departmentRepository = departmentRepository;
             _positionRepository = positionRepository;
+            _logUserActivityRepository = logUserActivityRepository;
 
             _hostingEnvironment = hostingEnvironment;
         }
@@ -290,6 +293,24 @@ namespace PurchasingSystemApps.Areas.MasterData.Controllers
                             }
                             user.Foto = ProcessUploadFile(viewModel);
                         }
+
+                        var localIpAddress = "192.168.0.11"; // Gantilah dengan logika untuk mendapatkan IP address jika diperlukan
+
+                        var logEntry = new LogUserActivity
+                        {
+                            CreateDateTime = DateTime.Now,
+                            CreateBy = new Guid(getUser.Id),
+                            LogActiveId = Guid.NewGuid(),
+                            LogLevel = "Admin",
+                            FullName = viewModel.FullName,
+                            Message = "Tambah Data User",
+                            Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                            IpAddres = localIpAddress,
+                            Action = "Tambah"
+                        };
+
+                        // Menyimpan LogUserActivity
+                        _logUserActivityRepository.Update(logEntry);
 
                         var result = await _userManager.UpdateAsync(userLogin);
 

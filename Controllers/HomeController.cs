@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using PurchasingSystemApps.Areas.MasterData.Repositories;
 using PurchasingSystemApps.Areas.MasterData.ViewModels;
 using PurchasingSystemApps.Data;
+using PurchasingSystemApps.Hubs;
 using PurchasingSystemApps.Models;
 using PurchasingSystemApps.Repositories;
 using System.Diagnostics;
@@ -17,18 +20,24 @@ namespace PurchasingSystemApps.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly IUserActiveRepository _userActiveRepository;
+        private readonly IHubContext<ChatHub> _hubContext;
+        private readonly ILogUserActivityRepository _logUserActivityActiveRepository;
 
         public HomeController(ILogger<HomeController> logger,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ApplicationDbContext context,
-            IUserActiveRepository userActiveRepository)
+            IUserActiveRepository userActiveRepository,
+            IHubContext<ChatHub> hubContext,
+            ILogUserActivityRepository logUserActivityRepository)
         {
             _logger = logger;
             _applicationDbContext = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _userActiveRepository = userActiveRepository;
+            _hubContext = hubContext;
+            _logUserActivityActiveRepository = logUserActivityRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -111,6 +120,29 @@ namespace PurchasingSystemApps.Controllers
             }
             return View();
         }
+
+        public async Task<IActionResult> Signalr()
+        {
+            var data2 = _logUserActivityActiveRepository.GetAllLogUserActivity();
+
+            // Buat list untuk menyimpan string empDetails
+            //var empDetails = new List<string>();
+            //foreach (var logger in data2)
+            //{
+            //    var detail = $"User: {logger.FullName}, Pesan: {logger.Message}";
+            //    empDetails.Add(detail);
+            //}
+            //var loggerData = empDetails.ToArray();
+            // Hitung jumlah data karyawan
+            int totalKaryawan = data2.Count();
+
+            // Kirim data ke semua klien menggunakan SignalR
+            await _hubContext.Clients.All.SendAsync("UpdateDataCount", totalKaryawan);
+            //await _hubContext.Clients.All.SendAsync("UpdateDataLogger", loggerData);
+
+            return View();
+        }
+
 
         public IActionResult Privacy()
         {

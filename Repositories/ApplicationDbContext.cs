@@ -31,6 +31,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<DueDate> DueDates { get; set; }
     public DbSet<Department> Departments { get; set; }
     public DbSet<Position> Positions { get; set; }
+    public DbSet<LogUserActivity> LogUserActivitys { get; set; }
     #endregion
 
     #region Areas Order

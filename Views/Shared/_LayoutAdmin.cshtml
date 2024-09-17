@@ -101,7 +101,23 @@
                 </li> *@
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#" role="button">
-                        <p>3rw</p>
+                        <i class="far fa-envelope"></i>
+                        <span class="badge badge-danger position-absolute"
+                                                             style="
+                                top: 0;
+                                right: 10px; /* Kurangi nilai ini untuk memindahkan badge lebih ke kiri */
+                                transform: translate(50%, -50%); /* Memastikan badge terpusat vertikal */
+                                background-color: rgb(255, 115, 0); /* Sesuaikan warna sesuai kebutuhan */
+                                color: white;
+                                border-radius: 50%;
+                                padding: 0.2rem 0.2rem; /* Sesuaikan padding untuk ukuran badge */
+                                font-size: 0.6rem; /* Sesuaikan ukuran font untuk badge */
+                                line-height: 1; /* Sesuaikan line-height untuk badge */
+                                min-width: 1.1rem; /* Sesuaikan lebar minimum untuk badge */
+                                text-align: center; /* Centang teks di tengah badge */
+                            " id="dataCountNotification">
+                            
+                        </span>
                     </a>
                 </li>
                 @if (signInManager.IsSignedIn(User))
@@ -356,6 +372,7 @@
     <script src="~/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/admin/dist/js/adminlte.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.0/signalr.min.js"></script>
     <script>
         // Hubungkan ke SignalR
         var connection = new signalR.HubConnectionBuilder().withUrl("/chathub").build();
@@ -371,6 +388,7 @@
         function updateData(totalKaryawan) {
             var notificationElement = document.getElementById("dataCountNotification");
 
+            console.log("Pangil Count .");
             if (notificationElement) {
                 if (!totalKaryawan || isNaN(totalKaryawan)) {
                     notificationElement.textContent = `0`;
@@ -452,9 +470,9 @@
         window.onload = function () {
             var storedTotalKaryawan = localStorage.getItem('totalKaryawan');
             console.log("Total karyawan diterima dari Local Storage  ", storedTotalKaryawan);
-            if (storedTotalKaryawan) {
+            // Pangil update
                 updateData(storedTotalKaryawan);
-            }
+            
             // var storedLoggerData = localStorage.getItem('loggerData');
             // console.log("Total karyawan diterima dari Local Storage  ", storedLoggerData);
             // if (storedLoggerData) {

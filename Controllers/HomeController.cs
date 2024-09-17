@@ -134,7 +134,7 @@ namespace PurchasingSystemApps.Controllers
             //}
             //var loggerData = empDetails.ToArray();
             // Hitung jumlah data karyawan
-            int totalKaryawan = data2.Count();
+            var totalKaryawan = "26";
 
             // Kirim data ke semua klien menggunakan SignalR
             await _hubContext.Clients.All.SendAsync("UpdateDataCount", totalKaryawan);
